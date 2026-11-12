@@ -130,7 +130,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <div class="top">
     <div class="brand"><div class="mark">H</div><div><div class="bname">我的理想家</div><div class="bsub">HOME RENOVATION</div></div></div>
     <div class="ops">
-      <button class="btn g" onclick="cloudRefresh()">☁ 刷新</button>
+      <button class="btn ai" onclick="openAIScan()">📷 截图识别</button>
+<button class="btn g" onclick="cloudRefresh()">☁ 刷新</button>
       <button class="btn g" onclick="exportCSV()">导出CSV</button>
     </div>
   </div>
@@ -169,6 +170,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
    ===================================================== */
 const SUPABASE_URL = 'https://xzqemukyazhwoqmqvogf.supabase.co'; 
 const SUPABASE_KEY = 'sb_publishable_g-N80wXBYPxEcAx05wGLBw_p27Al2DC';
+const ZHIPU_API_KEY = '8c9612a1e0834846a86c751c67edc4c6.07knrdZ6FjEaFdWN';
 /* ===================================================== */
 
 const KEY='home_reno_cloud_v1';
@@ -467,6 +469,61 @@ function addStage(){modal('新增阶段',[{key:'name',label:'阶段名称',type:
 function addChange(){modal('新增增项',[{type:'tip',html:'状态为「已确认」时，会从总预算剩余中扣除。'},{key:'name',label:'增项名称',type:'text',value:'',span:true},{key:'room',label:'房间',type:'select',value:'全屋',options:ROOMS},{key:'amount',label:'金额',type:'number',value:''},{key:'status',label:'状态',type:'select',value:'待确认',options:['待确认','已确认','已取消']},{key:'reason',label:'说明',type:'textarea',value:'',span:true}],d=>{if(!d.name){toast('请填写名称');return false}S.changes.push(Object.assign({id:uid()},d));save();toast('已保存')});document.getElementById('msave').style.display=''}
 function editChange(id){const c=S.changes.find(x=>x.id===id);modal('编辑增项',[{key:'name',label:'增项名称',type:'text',value:c.name,span:true},{key:'room',label:'房间',type:'select',value:c.room||'全屋',options:ROOMS},{key:'amount',label:'金额',type:'number',value:c.amount||''},{key:'status',label:'状态',type:'select',value:c.status||'待确认',options:['待确认','已确认','已取消']},{key:'reason',label:'说明',type:'textarea',value:c.reason||'',span:true}],d=>{Object.assign(c,d);save();toast('已保存')});document.getElementById('msave').style.display=''}
 function delChange(id){if(confirm('确定删除？')){S.changes=S.changes.filter(x=>x.id!==id);save();toast('已删除')}}
+
+function openAIScan(){
+  if(typeof ZHIPU_API_KEY === 'undefined' || ZHIPU_API_KEY.startsWith('在这里')){
+    alert('请先在代码里填入智谱 API Key！'); return;
+  }
+  const m=document.getElementById('modal'), mask=document.getElementById('mask');
+  document.getElementById('mtitle').textContent = '📷 AI 订单截图识别';
+  document.getElementById('mform').innerHTML = `
+    <div style="grid-column:1/-1; text-align:center; padding: 20px 0;">
+      <p style="font-size:13px; color:var(--ink2); margin-bottom:15px;">请上传订单截图，AI将自动提取信息。</p>
+      <input type="file" id="aiFile" accept="image/*" style="display:none" onchange="handleAIImage(this)">
+      <button class="btn p" type="button" onclick="document.getElementById('aiFile').click()">选择截图</button>
+      <div id="aiLoading" class="ai-loading"><span>✨ AI 识别中...</span></div>
+    </div>`;
+  mask.classList.add('on'); m.classList.add('on');
+  document.getElementById('msave').style.display = 'none';
+}
+
+function handleAIImage(input) {
+  const file = input.files[0]; if (!file) return;
+  document.getElementById('aiLoading').classList.add('on');
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64Image = e.target.result.split(',')[1];
+    try {
+      const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${ZHIPU_API_KEY}` },
+        body: JSON.stringify({
+          model: 'glm-4v-flash',
+          messages: [{ role: 'user', content: [
+            { type: 'text', text: '提取商品信息并用纯JSON返回，不要markdown：{"name": "商品名", "amount": 100.00, "channel": "京东或淘宝", "brand": "店铺名"}' },
+            { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${base64Image}` } }
+          ]}]
+        })
+      });
+      const data = await response.json();
+      if(data.error) throw new Error(data.error.message);
+      const parsed = JSON.parse(data.choices[0].message.content.replace(/```json/g, '').replace(/```/g, '').trim());
+      closeModal();
+      let autoModule = 'appliance';
+      if (parsed.name && parsed.name.includes('柜')) autoModule = 'custom';
+      if (parsed.name && (parsed.name.includes('窗帘') || parsed.name.includes('沙发'))) autoModule = 'furniture';
+      openItem(autoModule, null, {
+        name: parsed.name, amount: parsed.amount, brand: parsed.brand,
+        channel: parsed.channel ? (parsed.channel.includes('京') ? '京东' : (parsed.channel.includes('淘') ? '淘宝' : parsed.channel)) : '',
+        status: '已付款', applianceType: (parsed.name && parsed.name.includes('智能')) ? '智能家电' : '普通家电'
+      });
+      toast('✨ 识别成功！请确认');
+    } catch (err) {
+      alert('识别失败:\n' + err.message); closeModal();
+    }
+  };
+  reader.readAsDataURL(file);
+}
 
 function exportCSV(){
   const t=calc(),lines=[];
