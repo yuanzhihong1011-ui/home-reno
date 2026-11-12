@@ -122,7 +122,18 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .fab{width:48px;height:48px;border-radius:50%;flex:0 0 48px;background:linear-gradient(145deg,#C9A886,#9C7657);color:#fff;display:grid;place-items:center;font-size:23px;margin-top:-16px}
 #toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);background:rgba(46,42,38,.92);color:#fff;padding:10px 20px;border-radius:99px;font-size:12.5px;opacity:0;pointer-events:none;transition:.25s;z-index:300;white-space:nowrap}
 #toast.on{opacity:1;transform:translate(-50%,0)}
-@media(max-width:600px){.form{grid-template-columns:1fr}.hero h1{font-size:23px}.head h2{font-size:19px}.rec .l{flex-basis:100%}.rec .r{text-align:left;flex:1}.rec .st{margin-left:auto}}
+.chart-wrap{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:center;margin-top:10px}
+.chart-box{position:relative;width:220px;height:220px;flex:0 0 220px}
+.chart-info{flex:1;min-width:200px;background:#FCFAF6;border-radius:12px;padding:16px;border:1px dashed var(--line);text-align:center;transition:all .3s}
+.chart-info h4{font-size:16px;color:var(--wood-d);margin-bottom:8px}
+.chart-info .amt{font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.chart-info .pct{font-size:12px;color:var(--ink3)}
+.legend-list{display:flex;flex-direction:column;gap:8px;margin-top:16px;width:100%}
+.legend-item{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:8px 12px;border-radius:8px;cursor:pointer;transition:background .2s}
+.legend-item:hover{background:var(--bg)}
+.legend-left{display:flex;align-items:center;gap:8px}
+.legend-color{width:12px;height:12px;border-radius:3px}
+@media(max-width:600px){.form{grid-template-columns:1fr}.hero h1{font-size:23px}.head h2{font-size:19px}.rec .l{flex-basis:100%}.rec .r{text-align:left;flex:1}.rec .st{margin-left:auto}.chart-wrap{flex-direction:column}.chart-info{width:100%}}
 </style>
 </head>
 <body>
@@ -134,19 +145,42 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
       <button class="btn g" onclick="exportCSV()">导出CSV</button>
     </div>
   </div>
+  
   <div class="tabs" id="tabs">
     <button class="tab on" data-tab="home">总览</button>
     <button class="tab" data-tab="budget">预算</button>
     <button class="tab" data-tab="house">购房费用</button>
-    <button class="tab" data-tab="custom">全屋定制</button>
-    <button class="tab" data-tab="appliance">家电</button>
-    <button class="tab" data-tab="furniture">家具软装</button>
-    <button class="tab" data-tab="material">主材辅材</button>
-    <button class="tab" data-tab="labor">人工费</button>
+    <button class="tab" id="renoBtn" onclick="toggleRenoMenu()">装修 ▾</button>
     <button class="tab" data-tab="progress">施工进度</button>
-    <button class="tab" data-tab="changes">增项</button>
+    <button class="tab" data-tab="changes">其他费用</button>
     <button class="tab" data-tab="rooms">房间</button>
   </div>
+  
+  <div id="renoSubMenu" style="display:none; margin-bottom:16px; padding:12px; background:#FDFCFA; border:1px solid var(--line); border-radius:14px;">
+    <div style="display:flex; gap:16px; overflow-x:auto; scrollbar-width:none; align-items:flex-start; padding-bottom:6px;">
+      <div style="flex:1; min-width:130px;">
+        <div style="font-size:10.5px; color:var(--ink3); margin-bottom:6px; font-weight:600;">软装与定制</div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <button class="tab" style="text-align:left;" data-tab="custom">全屋定制</button>
+          <button class="tab" style="text-align:left;" data-tab="furniture">家具软装</button>
+        </div>
+      </div>
+      <div style="flex:1; min-width:100px;">
+        <div style="font-size:10.5px; color:var(--ink3); margin-bottom:6px; font-weight:600;">家电</div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <button class="tab" style="text-align:left;" data-tab="appliance">家电采购</button>
+        </div>
+      </div>
+      <div style="flex:1; min-width:130px;">
+        <div style="font-size:10.5px; color:var(--ink3); margin-bottom:6px; font-weight:600;">硬装施工</div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <button class="tab" style="text-align:left;" data-tab="material">主材辅材</button>
+          <button class="tab" style="text-align:left;" data-tab="labor">人工费</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="view"></div>
 </div>
 <div class="bnav">
@@ -191,11 +225,18 @@ function toast(m){const t=document.getElementById('toast');t.textContent=m;t.cla
 
 let db = null;
 let S=def(),tab='home',roomFocus=null;
+let chartData = []; 
+let payerChartData = [];
 
 function def(){return{
   updatedAt:0,
   meta:{title:'我的理想家',status:'装修进行中',area:'150–200㎡',type:'毛坯房全屋装修'},
-  budget:{total:1300000,cats:[{name:'购房费用',amount:1000000,mods:['house']},{name:'硬装',amount:120000,mods:['material','labor']},{name:'家电',amount:30000,mods:['appliance']},{name:'家具软装',amount:50000,mods:['furniture']},{name:'其他(含定制)',amount:100000,mods:['custom']}]},
+  budget:{total:1300000,cats:[
+    {name:'购房费用',amount:1000000,mods:['house']},
+    {name:'硬装',amount:120000,mods:['material','labor']},
+    {name:'软装',amount:150000,mods:['custom','furniture']},
+    {name:'家电',amount:30000,mods:['appliance']}
+  ]},
   items:[],changes:[],
   schedule:['拆改','水电','泥瓦','木工','油漆','安装','保洁','竣工'].map(n=>({id:uid(),name:n,status:'未开始',start:'',end:'',note:''}))
 }}
@@ -284,25 +325,37 @@ function calc(){
   S.items.forEach(i=>{
     c+=paid(i); 
     p+=paid(i);
-    // 统计已到货
-    if(i.status.includes('已到货') || i.status.includes('安装中') || i.status.includes('已完成')) {
-      arrived++;
-    }
-    // 统计已安装
-    if(i.status.includes('安装中') || i.status.includes('已完成')) {
-      installed++;
-    }
+    if(i.status.includes('已到货') || i.status.includes('安装中') || i.status.includes('已完成')) arrived++;
+    if(i.status.includes('安装中') || i.status.includes('已完成')) installed++;
   });
-  const ch=S.changes.filter(x=>x.status==='已确认').reduce((s,x)=>s+num(x.amount),0);
+  const ch=S.changes.reduce((s,x)=>s+num(x.amount),0);
   const total=p+ch;
   return{budget:num(S.budget.total),contract:c,itemsPaid:p,total,changes:ch,remaining:num(S.budget.total)-total,pending:0,arrived,installed}
 }
 
 function catPaid(cat){return S.items.filter(i=>cat.mods.includes(i.module)).reduce((s,i)=>s+paid(i),0)}
 
+function toggleRenoMenu() {
+  const menu = document.getElementById('renoSubMenu');
+  const btn = document.getElementById('renoBtn');
+  if (menu.style.display === 'none') {
+    menu.style.display = 'block';
+    btn.innerHTML = '装修 ▴';
+    btn.style.background = 'var(--wood-l)';
+    btn.style.color = 'var(--wood-d)';
+  } else {
+    menu.style.display = 'none';
+    btn.innerHTML = '装修 ▾';
+    btn.style.background = '#fff';
+    btn.style.color = 'var(--ink2)';
+  }
+}
+
 function render(){
   document.querySelectorAll('#tabs .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
+  document.querySelectorAll('#renoSubMenu .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
   document.querySelectorAll('.bn[data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
+  
   const v=document.getElementById('view');
   if(tab==='home')v.innerHTML=home();
   else if(tab==='budget')v.innerHTML=budget();
@@ -310,6 +363,13 @@ function render(){
   else if(tab==='changes')v.innerHTML=changes();
   else if(tab==='rooms')v.innerHTML=rooms();
   else v.innerHTML=moduleView(tab);
+  
+  if(tab==='home') {
+    setTimeout(() => {
+      drawChart();
+      drawPayerChart();
+    }, 50);
+  }
 }
 
 function home(){
@@ -318,18 +378,13 @@ function home(){
   const renoSpent = t.total - houseSpent;       
   const pct=t.budget?Math.min(100,t.total/t.budget*100):0;
   
-  const bars=S.budget.cats.map(c=>{
-    const u=catPaid(c),p=c.amount?Math.min(100,u/c.amount*100):0,over=u>c.amount;
-    return `<div class="brow"><div class="bh"><span>${esc(c.name)}</span><b>${fmt(c.amount)}</b></div><div class="bar"><i class="${over?'w':''}" style="width:${p}%"></i></div><div class="bf"><span>已花 ${fmt(u)}</span><span>${p.toFixed(0)}%</span></div></div>`
-  }).join('');
-  
   const cloudStatus = db
     ? `<span style="font-size:10.5px;color:var(--green)">● 云端已连接 (实时同步)</span>`
     : `<span style="font-size:10.5px;color:var(--red)">● 未连云端 (仅本地)</span>`;
     
   return `<div class="hero"><div class="k">HOME RENOVATION MANAGEMENT</div><h1>${esc(m.title)}</h1><div class="meta"><span class="tag">${esc(m.status)}</span><span>${esc(m.area)}</span><span>·</span><span>${esc(m.type)}</span></div><div class="ops" style="margin-top:14px"><button class="btn p" onclick="openAdd()">＋ 新增支出</button><button class="btn g" onclick="openBudget()">调整预算</button><button class="btn g" onclick="cloudRefresh()">☁ 手动刷新</button></div><div style="margin-top:10px">${cloudStatus}</div></div>
   <div class="grid">
-    <div class="stat acc"><div class="l">总投入预算</div><div class="v">${fmt(t.budget)}</div><div class="s">购房 · 硬装 · 家电软装</div></div>
+    <div class="stat acc"><div class="l">总投入预算</div><div class="v">${fmt(t.budget)}</div><div class="s">购房 · 硬装 · 软装 · 家电</div></div>
     <div class="stat">
       <div class="l">累计总支出</div>
       <div class="v ${t.total?'':'sm'}">${t.total?fmt(t.total):'待录入'}</div>
@@ -339,9 +394,261 @@ function home(){
     <div class="stat"><div class="l">已到货项目</div><div class="v">${t.arrived} 项</div><div class="s">含安装中/已完成</div></div>
     <div class="stat"><div class="l">已安装项目</div><div class="v">${t.installed} 项</div><div class="s">含安装中/已完成</div></div>
   </div>
+  
+  <div class="card">
+    <div class="ct">费用组成分析<span class="r">点击圆环查看详情</span></div>
+    <div class="chart-wrap">
+      <div class="chart-box">
+        <canvas id="expenseChart" width="220" height="220" style="cursor:pointer;" onclick="handleChartClick(event)"></canvas>
+      </div>
+      <div class="chart-info" id="chartInfo">
+        <h4>总投入预算</h4>
+        <div class="amt">${fmt(t.budget)}</div>
+        <div class="pct">点击左侧圆环查看明细</div>
+      </div>
+    </div>
+    <div class="legend-list" id="legendList"></div>
+  </div>
+
+  <div class="card">
+    <div class="ct">支付人汇总分析<span class="r">点击圆环查看详情</span></div>
+    <div class="chart-wrap">
+      <div class="chart-box">
+        <canvas id="payerChart" width="220" height="220" style="cursor:pointer;" onclick="handlePayerClick(event)"></canvas>
+      </div>
+      <div class="chart-info" id="payerInfo">
+        <h4>支付总额</h4>
+        <div class="amt">${fmt(t.total)}</div>
+        <div class="pct">点击左侧圆环查看明细</div>
+      </div>
+    </div>
+    <div class="legend-list" id="payerLegendList"></div>
+  </div>
+  
   <div class="card"><div class="ct">预算使用概览<span class="r">已使用 ${pct.toFixed(0)}%</span></div><div class="bar" style="height:9px"><i class="${t.remaining<0?'w':''}" style="width:${pct}%"></i></div><div class="bf" style="margin-top:8px"><span>已支出 ${fmt(t.total)}</span><span>剩余 ${fmt(t.remaining)}</span></div></div>
-  <div class="card"><div class="ct">分项预算</div>${bars}</div>
   <div class="card"><div class="ct">数据说明</div><div style="font-size:12.5px;color:var(--ink2);line-height:1.9">${db?'数据已连接云端，家人打开同一网址即可实时共享。':'未连云端。请按教程配置 Supabase。'}<br>最近更新：${S.updatedAt?new Date(S.updatedAt).toLocaleString('zh-CN'):'—'}</div></div>`;
+}
+
+function drawChart() {
+  const canvas = document.getElementById('expenseChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  const otherSpent = S.changes.reduce((s,x)=>s+num(x.amount),0);
+  chartData = S.budget.cats.map(cat => {
+    return { name: cat.name, budget: cat.amount, value: catPaid(cat), color: '' };
+  });
+  chartData.push({ name: '其他费用', budget: otherSpent, value: otherSpent, color: '' });
+  
+  const totalBudget = chartData.reduce((s, d) => s + d.budget, 0);
+  const colors = ['#B08968', '#6E9276', '#5B8AA6', '#7A6FA8', '#BF6A5C', '#A2988D', '#E2D8C9'];
+  
+  ctx.clearRect(0, 0, 220, 220);
+  
+  if (totalBudget === 0) {
+    ctx.fillStyle = '#A2988D';
+    ctx.font = '14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('暂无预算数据', 110, 110);
+    return;
+  }
+  
+  let startAngle = -Math.PI / 2;
+  
+  chartData.forEach((d, i) => {
+    const sliceAngle = (d.budget / totalBudget) * 2 * Math.PI;
+    d.color = colors[i % colors.length];
+    d.startAngle = startAngle;
+    d.endAngle = startAngle + sliceAngle;
+    
+    ctx.beginPath();
+    ctx.moveTo(110, 110);
+    ctx.arc(110, 110, 100, startAngle, startAngle + sliceAngle);
+    ctx.closePath();
+    ctx.fillStyle = d.color;
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    
+    startAngle += sliceAngle;
+  });
+  
+  ctx.beginPath();
+  ctx.arc(110, 110, 65, 0, Math.PI * 2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+  
+  const legend = document.getElementById('legendList');
+  legend.innerHTML = chartData.map((d, i) => `
+    <div class="legend-item" id="legend-${i}" onclick="showChartInfo(${i})">
+      <div class="legend-left"><div class="legend-color" style="background:${d.color}"></div>${d.name}</div>
+      <div style="text-align:right">
+        <div style="font-weight:600">预算 ${fmt(d.budget)}</div>
+        <div style="font-size:11px;color:var(--ink3)">已花 ${fmt(d.value)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function handleChartClick(e) {
+  const canvas = document.getElementById('expenseChart');
+  if (!canvas || chartData.length === 0) return;
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  const dx = x - 110;
+  const dy = y - 110;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  
+  if (dist > 65 && dist < 100) {
+    let angle = Math.atan2(dy, dx);
+    if (angle < -Math.PI/2) angle += Math.PI * 2;
+    
+    for (let i = 0; i < chartData.length; i++) {
+      const d = chartData[i];
+      if (angle >= d.startAngle && angle < d.endAngle) {
+        showChartInfo(i);
+        break;
+      }
+    }
+  }
+}
+
+function showChartInfo(index) {
+  const d = chartData[index];
+  if (!d) return;
+  
+  const totalBudget = chartData.reduce((s, item) => s + item.budget, 0);
+  const pct = totalBudget > 0 ? ((d.budget / totalBudget) * 100).toFixed(1) : 0;
+  const remain = d.budget - d.value;
+  
+  document.getElementById('chartInfo').innerHTML = `
+    <h4 style="color:${d.color}">${d.name}</h4>
+    <div style="font-size:14px;color:var(--ink2);margin-bottom:4px">预算：${fmt(d.budget)} (${pct}%)</div>
+    <div class="amt" style="color:${remain<0?'var(--red)':'var(--green)'}">已花：${fmt(d.value)}</div>
+    <div class="pct">剩余：${fmt(remain)}</div>
+  `;
+  
+  document.querySelectorAll('#legendList .legend-item').forEach(el => el.style.background = 'transparent');
+  const el = document.getElementById('legend-' + index);
+  if (el) el.style.background = 'var(--cream)';
+}
+
+function drawPayerChart() {
+  const canvas = document.getElementById('payerChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  // 统计支付人
+  const payerMap = {};
+  S.items.forEach(i=>{
+    const payer = i.payer || '未指定';
+    payerMap[payer] = (payerMap[payer] || 0) + paid(i);
+  });
+  S.changes.forEach(c=>{
+    const payer = c.payer || '未指定';
+    payerMap[payer] = (payerMap[payer] || 0) + num(c.amount);
+  });
+
+  payerChartData = Object.keys(payerMap).map(name => ({
+    name: name,
+    value: payerMap[name],
+    color: ''
+  }));
+
+  const totalValue = payerChartData.reduce((s, d) => s + d.value, 0);
+  const colors = ['#5B8AA6', '#BF6A5C', '#6E9276', '#7A6FA8', '#B08968', '#A2988D'];
+  
+  ctx.clearRect(0, 0, 220, 220);
+  
+  if (totalValue === 0) {
+    ctx.fillStyle = '#A2988D';
+    ctx.font = '14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('暂无支出数据', 110, 110);
+    return;
+  }
+  
+  let startAngle = -Math.PI / 2;
+  
+  payerChartData.forEach((d, i) => {
+    const sliceAngle = (d.value / totalValue) * 2 * Math.PI;
+    d.color = colors[i % colors.length];
+    d.startAngle = startAngle;
+    d.endAngle = startAngle + sliceAngle;
+    
+    ctx.beginPath();
+    ctx.moveTo(110, 110);
+    ctx.arc(110, 110, 100, startAngle, startAngle + sliceAngle);
+    ctx.closePath();
+    ctx.fillStyle = d.color;
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    
+    startAngle += sliceAngle;
+  });
+  
+  ctx.beginPath();
+  ctx.arc(110, 110, 65, 0, Math.PI * 2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+  
+  const legend = document.getElementById('payerLegendList');
+  legend.innerHTML = payerChartData.map((d, i) => `
+    <div class="legend-item" id="payer-legend-${i}" onclick="showPayerInfo(${i})">
+      <div class="legend-left"><div class="legend-color" style="background:${d.color}"></div>${d.name}</div>
+      <div style="text-align:right">
+        <div style="font-weight:600">${fmt(d.value)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function handlePayerClick(e) {
+  const canvas = document.getElementById('payerChart');
+  if (!canvas || payerChartData.length === 0) return;
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  const dx = x - 110;
+  const dy = y - 110;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  
+  if (dist > 65 && dist < 100) {
+    let angle = Math.atan2(dy, dx);
+    if (angle < -Math.PI/2) angle += Math.PI * 2;
+    
+    for (let i = 0; i < payerChartData.length; i++) {
+      const d = payerChartData[i];
+      if (angle >= d.startAngle && angle < d.endAngle) {
+        showPayerInfo(i);
+        break;
+      }
+    }
+  }
+}
+
+function showPayerInfo(index) {
+  const d = payerChartData[index];
+  if (!d) return;
+  
+  const totalValue = payerChartData.reduce((s, item) => s + item.value, 0);
+  const pct = totalValue > 0 ? ((d.value / totalValue) * 100).toFixed(1) : 0;
+  
+  document.getElementById('payerInfo').innerHTML = `
+    <h4 style="color:${d.color}">${d.name}</h4>
+    <div class="amt">${fmt(d.value)}</div>
+    <div class="pct">支付占比 ${pct}%</div>
+  `;
+  
+  document.querySelectorAll('#payerLegendList .legend-item').forEach(el => el.style.background = 'transparent');
+  const el = document.getElementById('payer-legend-' + index);
+  if (el) el.style.background = 'var(--cream)';
 }
 
 function budget(){
@@ -370,7 +677,7 @@ function moduleView(m){
     `;
   }
 
-  const rec=l.map(i=>`<div class="rec" data-type="${esc(i.applianceType||'')}"><div class="l"><div class="t">${esc(i.name)}</div><div class="m">${esc(i.houseType||i.laborType||i.room||'')} ${i.brand?'· '+esc(i.brand):''} ${i.channel?'· '+esc(i.channel):''} ${i.applianceType?'· '+esc(i.applianceType):''} ${i.spec?'· '+esc(i.spec):''} ${i.note?'· '+esc(i.note):''}</div></div><div class="r"><div class="a">${fmt(paid(i))}</div></div><div class="st">${esc(i.status||'已完成')}</div><div class="ops"><button class="btn t" onclick="editItem('${i.id}')">编辑</button><button class="btn x" onclick="delItem('${i.id}')">删除</button></div></div>`).join('');
+  const rec=l.map(i=>`<div class="rec" data-type="${esc(i.applianceType||'')}"><div class="l"><div class="t">${esc(i.name)}</div><div class="m">${esc(i.houseType||i.laborType||i.room||'')} ${i.brand?'· '+esc(i.brand):''} ${i.channel?'· '+esc(i.channel):''} ${i.applianceType?'· '+esc(i.applianceType):''} ${i.spec?'· '+esc(i.spec):''} ${i.payer?'· 💰'+esc(i.payer):''} ${i.note?'· '+esc(i.note):''}</div></div><div class="r"><div class="a">${fmt(paid(i))}</div></div><div class="st">${esc(i.status||'已完成')}</div><div class="ops"><button class="btn t" onclick="editItem('${i.id}')">编辑</button><button class="btn x" onclick="delItem('${i.id}')">删除</button></div></div>`).join('');
   
   return `<div class="head"><div><div class="k">${MODULES[m]}</div><h2>${MODULES[m]}</h2></div><button class="btn p" onclick="openItem('${m}')">＋ 新增项目</button></div>
   <div class="mini"><div><span>总花费</span><b>${fmt(c)}</b></div><div><span>条目</span><b>${l.length}</b></div></div>
@@ -397,22 +704,32 @@ function progress(){
 }
 
 function changes(){
-  const l=S.changes.map(c=>`<div class="rec"><div class="l"><div class="t">${esc(c.name)}</div><div class="m">${esc(c.room||'全屋')} ${c.reason?'· '+esc(c.reason):''}</div></div><div class="r"><div class="a">${fmt(c.amount)}</div></div><div class="st">${esc(c.status||'待确认')}</div><div class="ops"><button class="btn t" onclick="editChange('${c.id}')">编辑</button><button class="btn x" onclick="delChange('${c.id}')">删除</button></div></div>`).join('');
-  const con=S.changes.filter(c=>c.status==='已确认').reduce((s,c)=>s+num(c.amount),0);
-  return `<div class="head"><div><div class="k">CHANGE ORDER</div><h2>装修增项</h2></div><button class="btn p" onclick="addChange()">＋ 新增增项</button></div><div class="mini"><div><span>已确认</span><b style="color:var(--red)">${fmt(con)}</b></div><div><span>记录数</span><b>${S.changes.length}</b></div></div>${S.changes.length?l:`<div class="empty"><span class="e">📝</span>暂无增项</div>`}`;
+  const l=S.changes.map(c=>`<div class="rec"><div class="l"><div class="t">${esc(c.name)}</div><div class="m">${c.payer?'💰'+esc(c.payer):''} ${c.note?'· '+esc(c.note):''}</div></div><div class="r"><div class="a">${fmt(c.amount)}</div></div><div class="ops"><button class="btn t" onclick="editChange('${c.id}')">编辑</button><button class="btn x" onclick="delChange('${c.id}')">删除</button></div></div>`).join('');
+  const con=S.changes.reduce((s,c)=>s+num(c.amount),0);
+  return `<div class="head"><div><div class="k">OTHER FEES</div><h2>其他费用</h2></div><button class="btn p" onclick="addChange()">＋ 新增其他费用</button></div><div class="mini"><div><span>其他费用总计</span><b style="color:var(--red)">${fmt(con)}</b></div><div><span>记录数</span><b>${S.changes.length}</b></div></div>${S.changes.length?l:`<div class="empty"><span class="e">📝</span>暂无其他费用</div>`}`;
 }
 
 function rooms(){
   const map={};
-  S.items.forEach(i=>{const r=i.room||'未分类';if(!map[r])map[r]={a:0,p:0,n:0,list:[]};map[r].a+=num(i.amount);map[r].p+=paid(i);map[r].n++;map[r].list.push(i)});
+  S.items.forEach(i=>{
+    if(i.module === 'house' || i.module === 'labor') return;
+    if(i.room === '全屋' || i.room === '未分类' || !i.room) return; 
+    
+    const r=i.room;
+    if(!map[r])map[r]={a:0,p:0,n:0,list:[]};
+    map[r].a+=num(i.amount);
+    map[r].p+=paid(i);
+    map[r].n++;
+    map[r].list.push(i);
+  });
   const keys=Object.keys(map).sort((a,b)=>map[b].a-map[a].a);
   const cards=keys.map(r=>`<div class="room ${roomFocus===r?'on':''}" onclick="focusRoom('${esc(r)}')"><div class="rn">${esc(r)}</div><div class="ra">${fmt(map[r].a)}</div><div class="rs">共 ${map[r].n} 项</div></div>`).join('');
   let detail='';
   if(roomFocus&&map[roomFocus]){
-    const rows=map[roomFocus].list.map(i=>`<tr><td>${esc(i.name)}</td><td>${MODULES[i.module]}</td><td class="n">${fmt(paid(i))}</td><td>${esc(i.status)}</td></tr>`).join('');
-    detail=`<div class="card" style="margin-top:14px"><div class="ct">${esc(roomFocus)} · 明细</div><div class="tbl"><table><thead><tr><th>项目</th><th>模块</th><th class="n">金额</th><th>状态</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+    const rows=map[roomFocus].list.map(i=>`<tr><td>${esc(i.name)}</td><td>${MODULES[i.module]}</td><td class="n">${fmt(paid(i))}</td><td>${esc(i.payer||'')}</td></tr>`).join('');
+    detail=`<div class="card" style="margin-top:14px"><div class="ct">${esc(roomFocus)} · 明细</div><div class="tbl"><table><thead><tr><th>项目</th><th>模块</th><th class="n">金额</th><th>付款人</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
   }
-  return `<div class="head"><div><div class="k">BY ROOM</div><h2>房间费用</h2></div></div>${keys.length?`<div class="roomgrid">${cards}</div>`:`<div class="empty"><span class="e">🏠</span>暂无房间数据</div>`}${detail}`;
+  return `<div class="head"><div><div class="k">BY ROOM</div><h2>房间费用</h2></div></div>${keys.length?`<div class="roomgrid">${cards}</div>`:`<div class="empty"><span class="e">🏠</span>暂无具体房间数据</div>`}${detail}`;
 }
 
 function focusRoom(r){roomFocus=roomFocus===r?null:r;render()}
@@ -439,7 +756,7 @@ function modal(title,fields,onSave){
 function closeModal(){document.getElementById('modal').classList.remove('on');document.getElementById('mask').classList.remove('on')}
 function openAdd(){
   modal('新增什么？',[{type:'tip',html:'选择要新增的类别'}],()=>{});
-  document.getElementById('mform').innerHTML=`<div style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px">${Object.keys(MODULES).map(k=>`<button class="btn g" style="justify-content:flex-start" onclick="closeModal();openItem('${k}')">＋ ${MODULES[k]}</button>`).join('')}<button class="btn g" style="justify-content:flex-start" onclick="closeModal();addChange()">＋ 装修增项</button><button class="btn g" style="justify-content:flex-start" onclick="closeModal();addStage()">＋ 施工阶段</button></div>`;
+  document.getElementById('mform').innerHTML=`<div style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px">${Object.keys(MODULES).map(k=>`<button class="btn g" style="justify-content:flex-start" onclick="closeModal();openItem('${k}')">＋ ${MODULES[k]}</button>`).join('')}<button class="btn g" style="justify-content:flex-start" onclick="closeModal();addChange()">＋ 其他费用</button><button class="btn g" style="justify-content:flex-start" onclick="closeModal();addStage()">＋ 施工阶段</button></div>`;
   document.getElementById('msave').style.display='none';
 }
 
@@ -457,6 +774,7 @@ function openItem(m,id, defaultData = {}){
     {key:'name',label:'项目名称',type:'text',value:base.name||'',span:true,ph:isHouse?'例如：交首付款 / 缴契税':(isLabor?'例如：水电工钱 / 泥瓦工钱':'例如：冰箱 / 沙发')},
     {key:'module',label:'模块',type:'select',value:base.module,options:moduleOptions},
     {key:'amount',label:'实际花费',type:'number',value:base.amount || base.paid || ''},
+    {key:'payer',label:'支付人',type:'text',value:base.payer||'',span:true,placeholder:'例如：老公 / 老婆 / 父母'},
     {key:'note',label:'备注',type:'textarea',value:base.note||'',span:true}
   ];
 
@@ -509,15 +827,13 @@ function openBudget(){
     {key:'total',label:'总投入 (自动累加)',type:'number',value:S.budget.total,span:true},
     {key:'c1',label:'购房费用',type:'number',value:S.budget.cats[0].amount},
     {key:'c2',label:'硬装',type:'number',value:S.budget.cats[1].amount},
-    {key:'c3',label:'家电',type:'number',value:S.budget.cats[2].amount},
-    {key:'c4',label:'家具软装',type:'number',value:S.budget.cats[3].amount},
-    {key:'c5',label:'其他(含定制)',type:'number',value:S.budget.cats[4].amount}
+    {key:'c3',label:'软装',type:'number',value:S.budget.cats[2].amount},
+    {key:'c4',label:'家电',type:'number',value:S.budget.cats[3].amount}
   ],d=>{
     S.budget.cats[0].amount=num(d.c1);
     S.budget.cats[1].amount=num(d.c2);
     S.budget.cats[2].amount=num(d.c3);
     S.budget.cats[3].amount=num(d.c4);
-    S.budget.cats[4].amount=num(d.c5);
     S.budget.total = S.budget.cats.reduce((sum, cat) => sum + cat.amount, 0);
     save();toast('总预算已自动更新！');
   });
@@ -525,16 +841,28 @@ function openBudget(){
 }
 function editStage(id){const s=S.schedule.find(x=>x.id===id);modal('编辑阶段',[{key:'name',label:'阶段名称',type:'text',value:s.name,span:true},{key:'status',label:'状态',type:'select',value:s.status,options:['未开始','进行中','已完成']},{key:'start',label:'开始日期',type:'date',value:s.start||''},{key:'end',label:'结束日期',type:'date',value:s.end||''},{key:'note',label:'备注',type:'textarea',value:s.note||'',span:true}],d=>{Object.assign(s,d);save();toast('已更新')});document.getElementById('msave').style.display=''}
 function addStage(){modal('新增阶段',[{key:'name',label:'阶段名称',type:'text',value:'',span:true},{key:'status',label:'状态',type:'select',value:'未开始',options:['未开始','进行中','已完成']},{key:'start',label:'开始日期',type:'date',value:''},{key:'end',label:'结束日期',type:'date',value:''},{key:'note',label:'备注',type:'textarea',value:'',span:true}],d=>{if(!d.name){toast('请填写名称');return false}S.schedule.push(Object.assign({id:uid()},d));save();toast('已新增')});document.getElementById('msave').style.display=''}
-function addChange(){modal('新增增项',[{type:'tip',html:'状态为「已确认」时，会从总预算剩余中扣除。'},{key:'name',label:'增项名称',type:'text',value:'',span:true},{key:'room',label:'房间',type:'select',value:'全屋',options:ROOMS},{key:'amount',label:'金额',type:'number',value:''},{key:'status',label:'状态',type:'select',value:'待确认',options:['待确认','已确认','已取消']},{key:'reason',label:'说明',type:'textarea',value:'',span:true}],d=>{if(!d.name){toast('请填写名称');return false}S.changes.push(Object.assign({id:uid()},d));save();toast('已保存')});document.getElementById('msave').style.display=''}
-function editChange(id){const c=S.changes.find(x=>x.id===id);modal('编辑增项',[{key:'name',label:'增项名称',type:'text',value:c.name,span:true},{key:'room',label:'房间',type:'select',value:c.room||'全屋',options:ROOMS},{key:'amount',label:'金额',type:'number',value:c.amount||''},{key:'status',label:'状态',type:'select',value:c.status||'待确认',options:['待确认','已确认','已取消']},{key:'reason',label:'说明',type:'textarea',value:c.reason||'',span:true}],d=>{Object.assign(c,d);save();toast('已保存')});document.getElementById('msave').style.display=''}
+function addChange(){modal('新增其他费用',[
+  {key:'name',label:'费用明细',type:'text',value:'',span:true,placeholder:'例如：打孔费 / 搬运费'},
+  {key:'amount',label:'金额',type:'number',value:'',span:true},
+  {key:'payer',label:'支付人',type:'text',value:'',span:true,placeholder:'例如：老公 / 老婆'}
+],d=>{
+  if(!d.name){toast('请填写明细');return false}
+  S.changes.push({id:uid(), name:d.name, amount:num(d.amount), payer:d.payer, note:'', status:'已确认', room:'全屋'}); 
+  save();toast('已保存')
+});document.getElementById('msave').style.display=''}
+function editChange(id){const c=S.changes.find(x=>x.id===id);modal('编辑其他费用',[
+  {key:'name',label:'费用明细',type:'text',value:c.name,span:true},
+  {key:'amount',label:'金额',type:'number',value:c.amount||'',span:true},
+  {key:'payer',label:'支付人',type:'text',value:c.payer||'',span:true}
+],d=>{Object.assign(c,d);save();toast('已保存')});document.getElementById('msave').style.display=''}
 function delChange(id){if(confirm('确定删除？')){S.changes=S.changes.filter(x=>x.id!==id);save();toast('已删除')}}
 
 function exportCSV(){
   const t=calc(),lines=[];
   const push=a=>lines.push(a.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(','));
   push(['HOME · 我的理想家']);push(['导出时间',new Date().toLocaleString('zh-CN')]);push([]);
-  push(['【项目明细】']);push(['模块','子项/工种','名称','房间','品牌','途径','家电类型','金额','状态','备注']);
-  S.items.forEach(i=>push([MODULES[i.module],i.houseType||i.laborType||'',i.name,i.room||'',i.brand||'',i.channel||'',i.applianceType||'',num(i.amount),i.status,i.note||'']));
+  push(['【项目明细】']);push(['模块','子项/工种','名称','房间','品牌','途径','家电类型','金额','支付人','状态','备注']);
+  S.items.forEach(i=>push([MODULES[i.module],i.houseType||i.laborType||'',i.name,i.room||'',i.brand||'',i.channel||'',i.applianceType||'',num(i.amount),i.payer||'',i.status,i.note||'']));
   const blob = new Blob(['\uFEFF' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = `购房装修数据_${today()}.csv`;
@@ -548,7 +876,8 @@ function showMore(){
   }
 }
 
-document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b){tab=b.dataset.tab;roomFocus=null;render();window.scrollTo({top:0})}});
+document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b && b.dataset.tab){tab=b.dataset.tab;roomFocus=null;render();window.scrollTo({top:0})}});
+document.getElementById('renoSubMenu').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b && b.dataset.tab){tab=b.dataset.tab;roomFocus=null;render();window.scrollTo({top:0})}});
 document.querySelectorAll('.bn[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;roomFocus=null;render();window.scrollTo({top:0})});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
