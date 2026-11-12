@@ -33,12 +33,14 @@ input,select,textarea{font:inherit;color:inherit;outline:none}
 .tag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.7);border:1px solid #EADCC9;padding:3px 10px;border-radius:99px;font-size:11.5px}
 .tag::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--green)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:14px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;transition:.2s;cursor:pointer;}
+.stat:hover{border-color:var(--wood);box-shadow:0 4px 12px rgba(176,137,104,.15);transform:translateY(-2px)}
 .stat .l{font-size:11px;color:var(--ink3)}
 .stat .v{font-size:20px;font-weight:600;margin-top:7px;font-variant-numeric:tabular-nums}
 .stat .v.sm{font-size:17px}
 .stat .s{font-size:10.5px;color:var(--ink3);margin-top:4px}
-.stat.acc{background:linear-gradient(145deg,#B08968,#96704F);border-color:transparent;color:#fff}
+.stat.acc{background:linear-gradient(145deg,#B08968,#96704F);border-color:transparent;color:#fff;cursor:default;}
+.stat.acc:hover{transform:none;box-shadow:none;}
 .stat.acc .l,.stat.acc .s{color:rgba(255,255,255,.75)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:14px}
 .ct{font-size:12.5px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:7px}
@@ -47,7 +49,8 @@ input,select,textarea{font:inherit;color:inherit;outline:none}
 .bar{height:7px;border-radius:99px;background:var(--cream);overflow:hidden}
 .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#C9A886,#A9815C)}
 .bar i.w{background:linear-gradient(90deg,#D9A08F,#BF6A5C)}
-.brow{margin-bottom:14px}
+.brow{margin-bottom:14px;cursor:pointer;transition:.2s;padding:8px;border-radius:8px;margin-left:-8px;margin-right:-8px;}
+.brow:hover{background:var(--bg);}
 .brow:last-child{margin-bottom:0}
 .bh{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px}
 .bf{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink3);margin-top:5px}
@@ -64,7 +67,8 @@ input,select,textarea{font:inherit;color:inherit;outline:none}
 .mini div{display:flex;flex-direction:column;gap:2px}
 .mini span{font-size:10.5px;color:var(--ink3)}
 .mini b{font-size:15px;font-variant-numeric:tabular-nums}
-.rec{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 14px;margin-bottom:8px;flex-wrap:wrap}
+.rec{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 14px;margin-bottom:8px;flex-wrap:wrap;transition:.2s}
+.rec:hover{border-color:var(--wood);box-shadow:0 2px 8px rgba(176,137,104,.1);}
 .rec .l{flex:1;min-width:0}
 .rec .t{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rec .m{font-size:11px;color:var(--ink3);margin-top:2px}
@@ -94,7 +98,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .pill.d{background:rgba(176,137,104,.14);color:var(--wood-d)}
 .pill.f{background:rgba(110,146,118,.14);color:var(--green)}
 .roomgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}
-.room{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer}
+.room{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.2s}
+.room:hover{border-color:var(--wood);box-shadow:0 4px 12px rgba(176,137,104,.1)}
 .room.on{border-color:var(--wood);background:#FDFAF5}
 .room .rn{font-size:13px;font-weight:600}
 .room .ra{font-size:16px;font-weight:600;color:var(--wood-d);margin-top:6px}
@@ -124,7 +129,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 .chart-wrap{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:center;margin-top:10px}
 .chart-box{position:relative;width:220px;height:220px;flex:0 0 220px}
-.chart-info{flex:1;min-width:200px;background:#FCFAF6;border-radius:12px;padding:16px;border:1px dashed var(--line);text-align:center;transition:all .3s}
+.chart-info{flex:1;min-width:200px;background:#FCFAF6;border-radius:12px;padding:16px;border:1px dashed var(--line);text-align:center;transition:all .3s;cursor:pointer;}
+.chart-info:hover{background:var(--cream);}
 .chart-info h4{font-size:16px;color:var(--wood-d);margin-bottom:8px}
 .chart-info .amt{font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px;font-variant-numeric:tabular-nums}
 .chart-info .pct{font-size:12px;color:var(--ink3)}
@@ -133,11 +139,35 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .legend-item:hover{background:var(--bg)}
 .legend-left{display:flex;align-items:center;gap:8px}
 .legend-color{width:12px;height:12px;border-radius:3px}
+
+#loginOverlay{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-box{background:#fff;padding:30px;border-radius:20px;box-shadow:0 10px 40px rgba(46,42,38,.08);width:100%;max-width:340px;text-align:center;border:1px solid var(--line);}
+.login-box h2{font-family:Georgia,"Songti SC",serif;font-size:22px;color:var(--ink);margin-bottom:20px;letter-spacing:.05em;}
+.login-box input{width:100%;padding:12px 15px;border:1px solid var(--line);border-radius:12px;font-size:16px;margin-bottom:15px;text-align:center;letter-spacing:.2em;}
+.login-box input:focus{border-color:var(--wood);box-shadow:0 0 0 3px rgba(176,137,104,.1);}
+.login-box button{width:100%;padding:12px;background:var(--wood);color:#fff;border-radius:12px;font-size:15px;font-weight:600;transition:.2s;}
+.login-box button:hover{background:var(--wood-d);}
+.login-box p{font-size:12px;color:var(--red);margin-top:10px;height:16px;}
+
+.group-title{font-size:13.5px;font-weight:600;color:var(--wood-d);margin:16px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;}
+.group-title:first-child{margin-top:0;}
+.group-subtotal{font-size:12px;color:var(--ink3);font-weight:400;}
+
 @media(max-width:600px){.form{grid-template-columns:1fr}.hero h1{font-size:23px}.head h2{font-size:19px}.rec .l{flex-basis:100%}.rec .r{text-align:left;flex:1}.rec .st{margin-left:auto}.chart-wrap{flex-direction:column}.chart-info{width:100%}}
 </style>
 </head>
 <body>
-<div class="wrap">
+
+<div id="loginOverlay">
+  <div class="login-box">
+    <h2>HOME · 我的理想家</h2>
+    <input type="password" id="pwdInput" placeholder="请输入访问密码" onkeypress="if(event.key==='Enter') checkPwd()">
+    <button onclick="checkPwd()">进入系统</button>
+    <p id="loginErr"></p>
+  </div>
+</div>
+
+<div class="wrap" id="appWrap" style="display:none;">
   <div class="top">
     <div class="brand"><div class="mark">H</div><div><div class="bname">我的理想家</div><div class="bsub">HOME RENOVATION</div></div></div>
     <div class="ops">
@@ -150,10 +180,10 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <button class="tab on" data-tab="home">总览</button>
     <button class="tab" data-tab="budget">预算</button>
     <button class="tab" data-tab="house">购房费用</button>
+    <button class="tab" data-tab="rooms">房间</button>
     <button class="tab" id="renoBtn" onclick="toggleRenoMenu()">装修 ▾</button>
     <button class="tab" data-tab="progress">施工进度</button>
     <button class="tab" data-tab="changes">其他费用</button>
-    <button class="tab" data-tab="rooms">房间</button>
   </div>
   
   <div id="renoSubMenu" style="display:none; margin-bottom:16px; padding:12px; background:#FDFCFA; border:1px solid var(--line); border-radius:14px;">
@@ -183,7 +213,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 
   <div id="view"></div>
 </div>
-<div class="bnav">
+<div class="bnav" id="bottomNav" style="display:none;">
   <div class="bn on" data-tab="home"><span>🏠</span>首页</div>
   <div class="bn" data-tab="budget"><span>📊</span>预算</div>
   <div class="fab" onclick="openAdd()">＋</div>
@@ -192,9 +222,9 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 </div>
 <div id="mask" onclick="closeModal()"></div>
 <div id="modal">
-  <div class="mh"><h3 id="mtitle">新增</h3><button class="close" onclick="closeModal()">✕</button></div>
+  <div class="mh"><h3 id="mtitle">详情</h3><button class="close" onclick="closeModal()">✕</button></div>
   <div class="mb"><form id="mform" class="form" autocomplete="off"></form></div>
-  <div class="mf"><button class="btn g" onclick="closeModal()">取消</button><button class="btn p" id="msave">保存</button></div>
+  <div class="mf"><button class="btn g" onclick="closeModal()">关闭</button><button class="btn p" id="msave" style="display:none;">保存</button></div>
 </div>
 <div id="toast"></div>
 
@@ -205,6 +235,9 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
    ===================================================== */
 const SUPABASE_URL = 'https://xzqemukyazhwoqmqvogf.supabase.co'; 
 const SUPABASE_KEY = 'sb_publishable_g-N80wXBYPxEcAx05wGLBw_p27Al2DC';
+
+// 密码配置 (默认密码是 123456)
+const PWD_HASH = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'; 
 /* ===================================================== */
 
 const KEY='home_reno_cloud_v1';
@@ -222,6 +255,27 @@ const fmt=n=>'¥'+Math.round(num(n)).toLocaleString('zh-CN');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const today=()=>new Date().toISOString().slice(0,10);
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),1800)}
+
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function checkPwd() {
+  const pwd = document.getElementById('pwdInput').value;
+  const hash = await sha256(pwd);
+  
+  if (hash === PWD_HASH) {
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('appWrap').style.display = 'block';
+    document.getElementById('bottomNav').style.display = 'flex';
+    if(!S.updatedAt) init();
+  } else {
+    document.getElementById('loginErr').textContent = '密码错误，请重试';
+  }
+}
 
 let db = null;
 let S=def(),tab='home',roomFocus=null;
@@ -325,8 +379,10 @@ function calc(){
   S.items.forEach(i=>{
     c+=paid(i); 
     p+=paid(i);
-    if(i.status.includes('已到货') || i.status.includes('安装中') || i.status.includes('已完成')) arrived++;
-    if(i.status.includes('安装中') || i.status.includes('已完成')) installed++;
+    if(i.module === 'appliance') {
+      if(i.status.includes('已到货') || i.status.includes('安装中') || i.status.includes('已完成')) arrived++;
+      if(i.status.includes('安装中') || i.status.includes('已完成')) installed++;
+    }
   });
   const ch=S.changes.reduce((s,x)=>s+num(x.amount),0);
   const total=p+ch;
@@ -372,6 +428,73 @@ function render(){
   }
 }
 
+function showList(title, items) {
+  const m=document.getElementById('modal'), mask=document.getElementById('mask');
+  document.getElementById('mtitle').textContent=title;
+  
+  let html = `<div style="grid-column:1/-1; max-height: 60vh; overflow-y: auto;">`;
+  if(items.length === 0) {
+    html += `<div class="empty">暂无数据</div>`;
+  } else {
+    const groups = {};
+    items.forEach(i => {
+      let groupName = i.room || (i.module === 'house' ? '购房相关' : '全局/未分类');
+      if(!groups[groupName]) groups[groupName] = { total: 0, list: [] };
+      groups[groupName].total += (paid(i) || i.amount);
+      groups[groupName].list.push(i);
+    });
+
+    const sortedKeys = Object.keys(groups).sort((a, b) => groups[b].total - groups[a].total);
+
+    html += sortedKeys.map(groupName => {
+      const g = groups[groupName];
+      return `
+        <div class="group-title">
+          <span>🏠 ${esc(groupName)}</span>
+          <span class="group-subtotal">小计: ${fmt(g.total)}</span>
+        </div>
+        ${g.list.map(i => `
+          <div class="rec" style="margin-bottom:8px; padding:10px;">
+            <div class="l">
+              <div class="t">${esc(i.name)}</div>
+              <div class="m">${i.payer?'💰'+esc(i.payer)+' ':''} ${i.status?'📌'+esc(i.status):''}</div>
+            </div>
+            <div class="r"><div class="a">${fmt(paid(i) || i.amount)}</div></div>
+            <div class="ops">
+              <button class="btn t" onclick="closeModal(); ${i.module ? `editItem('${i.id}')` : `editChange('${i.id}')`}">✏️ 编辑</button>
+            </div>
+          </div>
+        `).join('')}
+      `;
+    }).join('');
+  }
+  html += `</div>`;
+  
+  document.getElementById('mform').innerHTML = html;
+  mask.classList.add('on'); m.classList.add('on');
+  document.getElementById('msave').style.display = 'none';
+}
+
+function resetChartInfo() {
+  const totalBudget = chartData.reduce((s, item) => s + item.budget, 0);
+  document.getElementById('chartInfo').innerHTML = `
+    <h4>总投入预算</h4>
+    <div class="amt">${fmt(totalBudget)}</div>
+    <div class="pct">点击图表或列表查看分类</div>
+  `;
+  document.querySelectorAll('#legendList .legend-item').forEach(el => el.style.background = 'transparent');
+}
+
+function resetPayerInfo() {
+  const totalValue = payerChartData.reduce((s, item) => s + item.value, 0);
+  document.getElementById('payerInfo').innerHTML = `
+    <h4>支付总额</h4>
+    <div class="amt">${fmt(totalValue)}</div>
+    <div class="pct">点击图表或列表查看明细</div>
+  `;
+  document.querySelectorAll('#payerLegendList .legend-item').forEach(el => el.style.background = 'transparent');
+}
+
 function home(){
   const t=calc(),m=S.meta;
   const houseSpent = catPaid(S.budget.cats[0]); 
@@ -385,41 +508,49 @@ function home(){
   return `<div class="hero"><div class="k">HOME RENOVATION MANAGEMENT</div><h1>${esc(m.title)}</h1><div class="meta"><span class="tag">${esc(m.status)}</span><span>${esc(m.area)}</span><span>·</span><span>${esc(m.type)}</span></div><div class="ops" style="margin-top:14px"><button class="btn p" onclick="openAdd()">＋ 新增支出</button><button class="btn g" onclick="openBudget()">调整预算</button><button class="btn g" onclick="cloudRefresh()">☁ 手动刷新</button></div><div style="margin-top:10px">${cloudStatus}</div></div>
   <div class="grid">
     <div class="stat acc"><div class="l">总投入预算</div><div class="v">${fmt(t.budget)}</div><div class="s">购房 · 硬装 · 软装 · 家电</div></div>
-    <div class="stat">
+    
+    <div class="stat clickable" onclick="showList('全部支出明细', [...S.items, ...S.changes])">
       <div class="l">累计总支出</div>
       <div class="v ${t.total?'':'sm'}">${t.total?fmt(t.total):'待录入'}</div>
       <div class="s" style="color:var(--wood-d); font-weight:600;">购房 ${fmt(houseSpent)} | 装修 ${fmt(renoSpent)}</div>
     </div>
+    
     <div class="stat"><div class="l">剩余可用预算</div><div class="v ${t.remaining<0?'over':''}">${fmt(t.remaining)}</div><div class="s">总预算 − 实际支出</div></div>
-    <div class="stat"><div class="l">已到货项目</div><div class="v">${t.arrived} 项</div><div class="s">含安装中/已完成</div></div>
-    <div class="stat"><div class="l">已安装项目</div><div class="v">${t.installed} 项</div><div class="s">含安装中/已完成</div></div>
+    
+    <div class="stat clickable" onclick="showList('家电已到货项目', S.items.filter(i=>i.module==='appliance' && (i.status.includes('已到货')||i.status.includes('安装中')||i.status.includes('已完成'))))">
+      <div class="l">家电已到货</div><div class="v">${t.arrived} 项</div><div class="s">含安装中/已完成</div>
+    </div>
+    
+    <div class="stat clickable" onclick="showList('家电已安装项目', S.items.filter(i=>i.module==='appliance' && (i.status.includes('安装中')||i.status.includes('已完成'))))">
+      <div class="l">家电已安装</div><div class="v">${t.installed} 项</div><div class="s">含安装中/已完成</div>
+    </div>
   </div>
   
   <div class="card">
-    <div class="ct">费用组成分析<span class="r">点击圆环查看详情</span></div>
+    <div class="ct">费用组成分析<span class="r">点击列表查看分类</span></div>
     <div class="chart-wrap">
       <div class="chart-box">
         <canvas id="expenseChart" width="220" height="220" style="cursor:pointer;" onclick="handleChartClick(event)"></canvas>
       </div>
-      <div class="chart-info" id="chartInfo">
+      <div class="chart-info" id="chartInfo" onclick="resetChartInfo()">
         <h4>总投入预算</h4>
         <div class="amt">${fmt(t.budget)}</div>
-        <div class="pct">点击左侧圆环查看明细</div>
+        <div class="pct">点击图表或列表查看分类</div>
       </div>
     </div>
     <div class="legend-list" id="legendList"></div>
   </div>
 
   <div class="card">
-    <div class="ct">支付人汇总分析<span class="r">点击圆环查看详情</span></div>
+    <div class="ct">支付人汇总分析<span class="r">点击列表查看明细</span></div>
     <div class="chart-wrap">
       <div class="chart-box">
         <canvas id="payerChart" width="220" height="220" style="cursor:pointer;" onclick="handlePayerClick(event)"></canvas>
       </div>
-      <div class="chart-info" id="payerInfo">
+      <div class="chart-info" id="payerInfo" onclick="resetPayerInfo()">
         <h4>支付总额</h4>
         <div class="amt">${fmt(t.total)}</div>
-        <div class="pct">点击左侧圆环查看明细</div>
+        <div class="pct">点击图表或列表查看明细</div>
       </div>
     </div>
     <div class="legend-list" id="payerLegendList"></div>
@@ -436,9 +567,9 @@ function drawChart() {
   
   const otherSpent = S.changes.reduce((s,x)=>s+num(x.amount),0);
   chartData = S.budget.cats.map(cat => {
-    return { name: cat.name, budget: cat.amount, value: catPaid(cat), color: '' };
+    return { name: cat.name, budget: cat.amount, value: catPaid(cat), color: '', items: S.items.filter(i=>cat.mods.includes(i.module)) };
   });
-  chartData.push({ name: '其他费用', budget: otherSpent, value: otherSpent, color: '' });
+  chartData.push({ name: '其他费用', budget: otherSpent, value: otherSpent, color: '', items: S.changes });
   
   const totalBudget = chartData.reduce((s, d) => s + d.budget, 0);
   const colors = ['#B08968', '#6E9276', '#5B8AA6', '#7A6FA8', '#BF6A5C', '#A2988D', '#E2D8C9'];
@@ -489,6 +620,8 @@ function drawChart() {
       </div>
     </div>
   `).join('');
+  
+  resetChartInfo();
 }
 
 function handleChartClick(e) {
@@ -513,6 +646,8 @@ function handleChartClick(e) {
         break;
       }
     }
+  } else {
+    resetChartInfo();
   }
 }
 
@@ -528,12 +663,14 @@ function showChartInfo(index) {
     <h4 style="color:${d.color}">${d.name}</h4>
     <div style="font-size:14px;color:var(--ink2);margin-bottom:4px">预算：${fmt(d.budget)} (${pct}%)</div>
     <div class="amt" style="color:${remain<0?'var(--red)':'var(--green)'}">已花：${fmt(d.value)}</div>
-    <div class="pct">剩余：${fmt(remain)}</div>
+    <div class="pct">点击查看明细清单</div>
   `;
   
   document.querySelectorAll('#legendList .legend-item').forEach(el => el.style.background = 'transparent');
   const el = document.getElementById('legend-' + index);
   if (el) el.style.background = 'var(--cream)';
+  
+  document.getElementById('chartInfo').onclick = () => showList(d.name + ' 明细', d.items);
 }
 
 function drawPayerChart() {
@@ -541,7 +678,6 @@ function drawPayerChart() {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   
-  // 统计支付人
   const payerMap = {};
   S.items.forEach(i=>{
     const payer = i.payer || '未指定';
@@ -552,11 +688,16 @@ function drawPayerChart() {
     payerMap[payer] = (payerMap[payer] || 0) + num(c.amount);
   });
 
-  payerChartData = Object.keys(payerMap).map(name => ({
-    name: name,
-    value: payerMap[name],
-    color: ''
-  }));
+  payerChartData = Object.keys(payerMap).map(name => {
+    let items = S.items.filter(i => (i.payer||'未指定') === name);
+    let changes = S.changes.filter(c => (c.payer||'未指定') === name);
+    return {
+      name: name,
+      value: payerMap[name],
+      color: '',
+      items: [...items, ...changes]
+    };
+  });
 
   const totalValue = payerChartData.reduce((s, d) => s + d.value, 0);
   const colors = ['#5B8AA6', '#BF6A5C', '#6E9276', '#7A6FA8', '#B08968', '#A2988D'];
@@ -606,6 +747,8 @@ function drawPayerChart() {
       </div>
     </div>
   `).join('');
+  
+  resetPayerInfo();
 }
 
 function handlePayerClick(e) {
@@ -630,6 +773,8 @@ function handlePayerClick(e) {
         break;
       }
     }
+  } else {
+    resetPayerInfo();
   }
 }
 
@@ -643,22 +788,24 @@ function showPayerInfo(index) {
   document.getElementById('payerInfo').innerHTML = `
     <h4 style="color:${d.color}">${d.name}</h4>
     <div class="amt">${fmt(d.value)}</div>
-    <div class="pct">支付占比 ${pct}%</div>
+    <div class="pct">支付占比 ${pct}% | 点击看明细</div>
   `;
   
   document.querySelectorAll('#payerLegendList .legend-item').forEach(el => el.style.background = 'transparent');
   const el = document.getElementById('payer-legend-' + index);
   if (el) el.style.background = 'var(--cream)';
+  
+  document.getElementById('payerInfo').onclick = () => showList(d.name + ' 支付明细', d.items);
 }
 
 function budget(){
   const t=calc();
-  const rows=S.budget.cats.map(c=>{const u=catPaid(c),rest=c.amount-u,over=rest<0;return `<tr><td><b>${esc(c.name)}</b></td><td class="n">${fmt(c.amount)}</td><td class="n">${fmt(u)}</td><td class="n ${over?'over':''}">${fmt(rest)}</td></tr>`}).join('');
-  const mods=Object.keys(MODULES).map(k=>{const l=itemsBy(k),c=l.reduce((s,i)=>s+paid(i),0);return `<tr><td>${MODULES[k]}</td><td class="n">${l.length}</td><td class="n">${fmt(c)}</td></tr>`}).join('');
+  const rows=S.budget.cats.map(c=>{const u=catPaid(c),rest=c.amount-u,over=rest<0;return `<tr class="clickable-row" style="cursor:pointer;" onclick="showList('${esc(c.name)} 明细', S.items.filter(i=>['${c.mods.join("','")}'].includes(i.module)))"><td><b>${esc(c.name)}</b></td><td class="n">${fmt(c.amount)}</td><td class="n">${fmt(u)}</td><td class="n ${over?'over':''}">${fmt(rest)}</td></tr>`}).join('');
+  const mods=Object.keys(MODULES).map(k=>{const l=itemsBy(k),c=l.reduce((s,i)=>s+paid(i),0);return `<tr class="clickable-row" style="cursor:pointer;" onclick="showList('${MODULES[k]} 明细', S.items.filter(i=>i.module==='${k}'))"><td>${MODULES[k]}</td><td class="n">${l.length}</td><td class="n">${fmt(c)}</td></tr>`}).join('');
   return `<div class="head"><div><div class="k">BUDGET</div><h2>预算与支出中心</h2></div><button class="btn p" onclick="openAdd()">＋ 新增支出</button></div>
-  <div class="grid"><div class="stat acc"><div class="l">总预算</div><div class="v">${fmt(t.budget)}</div></div><div class="stat"><div class="l">累计总支出</div><div class="v">${fmt(t.total)}</div></div><div class="stat"><div class="l">剩余可用</div><div class="v ${t.remaining<0?'over':''}">${fmt(t.remaining)}</div></div></div>
-  <div class="card"><div class="ct">分项预算</div><div class="tbl"><table><thead><tr><th>分类</th><th class="n">规划</th><th class="n">实际花费</th><th class="n">剩余</th></tr></thead><tbody>${rows}</tbody></table></div></div>
-  <div class="card"><div class="ct">按模块</div><div class="tbl"><table><thead><tr><th>模块</th><th class="n">条目</th><th class="n">实际花费</th></tr></thead><tbody>${mods}</tbody></table></div></div>`;
+  <div class="grid"><div class="stat acc clickable" onclick="showList('所有项目明细', S.items)"><div class="l">总预算</div><div class="v">${fmt(t.budget)}</div></div><div class="stat clickable" onclick="showList('所有支出明细', [...S.items, ...S.changes])"><div class="l">累计总支出</div><div class="v">${fmt(t.total)}</div></div><div class="stat"><div class="l">剩余可用</div><div class="v ${t.remaining<0?'over':''}">${fmt(t.remaining)}</div></div></div>
+  <div class="card"><div class="ct">分项预算 <span style="font-size:10px;color:var(--ink3);margin-left:10px;">(点击行看明细)</span></div><div class="tbl"><table><thead><tr><th>分类</th><th class="n">规划</th><th class="n">实际花费</th><th class="n">剩余</th></tr></thead><tbody>${rows}</tbody></table></div></div>
+  <div class="card"><div class="ct">按模块 <span style="font-size:10px;color:var(--ink3);margin-left:10px;">(点击行看明细)</span></div><div class="tbl"><table><thead><tr><th>模块</th><th class="n">条目</th><th class="n">实际花费</th></tr></thead><tbody>${mods}</tbody></table></div></div>`;
 }
 
 function moduleView(m){
@@ -677,7 +824,7 @@ function moduleView(m){
     `;
   }
 
-  const rec=l.map(i=>`<div class="rec" data-type="${esc(i.applianceType||'')}"><div class="l"><div class="t">${esc(i.name)}</div><div class="m">${esc(i.houseType||i.laborType||i.room||'')} ${i.brand?'· '+esc(i.brand):''} ${i.channel?'· '+esc(i.channel):''} ${i.applianceType?'· '+esc(i.applianceType):''} ${i.spec?'· '+esc(i.spec):''} ${i.payer?'· 💰'+esc(i.payer):''} ${i.note?'· '+esc(i.note):''}</div></div><div class="r"><div class="a">${fmt(paid(i))}</div></div><div class="st">${esc(i.status||'已完成')}</div><div class="ops"><button class="btn t" onclick="editItem('${i.id}')">编辑</button><button class="btn x" onclick="delItem('${i.id}')">删除</button></div></div>`).join('');
+  const rec=l.map(i=>`<div class="rec" onclick="editItem('${i.id}')" data-type="${esc(i.applianceType||'')}"><div class="l"><div class="t">${esc(i.name)}</div><div class="m">${esc(i.houseType||i.laborType||i.room||'')} ${i.brand?'· '+esc(i.brand):''} ${i.channel?'· '+esc(i.channel):''} ${i.applianceType?'· '+esc(i.applianceType):''} ${i.spec?'· '+esc(i.spec):''} ${i.payer?'· 💰'+esc(i.payer):''} ${i.note?'· '+esc(i.note):''}</div></div><div class="r"><div class="a">${fmt(paid(i))}</div></div><div class="st">${esc(i.status||'已完成')}</div><div class="ops"><button class="btn t" onclick="event.stopPropagation(); editItem('${i.id}')">编辑</button><button class="btn x" onclick="event.stopPropagation(); delItem('${i.id}')">删除</button></div></div>`).join('');
   
   return `<div class="head"><div><div class="k">${MODULES[m]}</div><h2>${MODULES[m]}</h2></div><button class="btn p" onclick="openItem('${m}')">＋ 新增项目</button></div>
   <div class="mini"><div><span>总花费</span><b>${fmt(c)}</b></div><div><span>条目</span><b>${l.length}</b></div></div>
@@ -704,7 +851,7 @@ function progress(){
 }
 
 function changes(){
-  const l=S.changes.map(c=>`<div class="rec"><div class="l"><div class="t">${esc(c.name)}</div><div class="m">${c.payer?'💰'+esc(c.payer):''} ${c.note?'· '+esc(c.note):''}</div></div><div class="r"><div class="a">${fmt(c.amount)}</div></div><div class="ops"><button class="btn t" onclick="editChange('${c.id}')">编辑</button><button class="btn x" onclick="delChange('${c.id}')">删除</button></div></div>`).join('');
+  const l=S.changes.map(c=>`<div class="rec" onclick="editChange('${c.id}')"><div class="l"><div class="t">${esc(c.name)}</div><div class="m">${c.payer?'💰'+esc(c.payer):''} ${c.note?'· '+esc(c.note):''}</div></div><div class="r"><div class="a">${fmt(c.amount)}</div></div><div class="ops"><button class="btn t" onclick="event.stopPropagation(); editChange('${c.id}')">编辑</button><button class="btn x" onclick="event.stopPropagation(); delChange('${c.id}')">删除</button></div></div>`).join('');
   const con=S.changes.reduce((s,c)=>s+num(c.amount),0);
   return `<div class="head"><div><div class="k">OTHER FEES</div><h2>其他费用</h2></div><button class="btn p" onclick="addChange()">＋ 新增其他费用</button></div><div class="mini"><div><span>其他费用总计</span><b style="color:var(--red)">${fmt(con)}</b></div><div><span>记录数</span><b>${S.changes.length}</b></div></div>${S.changes.length?l:`<div class="empty"><span class="e">📝</span>暂无其他费用</div>`}`;
 }
@@ -726,8 +873,8 @@ function rooms(){
   const cards=keys.map(r=>`<div class="room ${roomFocus===r?'on':''}" onclick="focusRoom('${esc(r)}')"><div class="rn">${esc(r)}</div><div class="ra">${fmt(map[r].a)}</div><div class="rs">共 ${map[r].n} 项</div></div>`).join('');
   let detail='';
   if(roomFocus&&map[roomFocus]){
-    const rows=map[roomFocus].list.map(i=>`<tr><td>${esc(i.name)}</td><td>${MODULES[i.module]}</td><td class="n">${fmt(paid(i))}</td><td>${esc(i.payer||'')}</td></tr>`).join('');
-    detail=`<div class="card" style="margin-top:14px"><div class="ct">${esc(roomFocus)} · 明细</div><div class="tbl"><table><thead><tr><th>项目</th><th>模块</th><th class="n">金额</th><th>付款人</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+    const rows=map[roomFocus].list.map(i=>`<tr class="clickable-row" style="cursor:pointer;" onclick="editItem('${i.id}')"><td>${esc(i.name)}</td><td>${MODULES[i.module]}</td><td class="n">${fmt(paid(i))}</td><td>${esc(i.payer||'')}</td></tr>`).join('');
+    detail=`<div class="card" style="margin-top:14px"><div class="ct">${esc(roomFocus)} · 明细 <span style="font-size:10px;color:var(--ink3);margin-left:10px;">(点击行可编辑)</span></div><div class="tbl"><table><thead><tr><th>项目</th><th>模块</th><th class="n">金额</th><th>付款人</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
   }
   return `<div class="head"><div><div class="k">BY ROOM</div><h2>房间费用</h2></div></div>${keys.length?`<div class="roomgrid">${cards}</div>`:`<div class="empty"><span class="e">🏠</span>暂无具体房间数据</div>`}${detail}`;
 }
@@ -881,7 +1028,7 @@ document.getElementById('renoSubMenu').addEventListener('click',e=>{const b=e.ta
 document.querySelectorAll('.bn[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;roomFocus=null;render();window.scrollTo({top:0})});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
-init();
+// init();
 </script>
 </body>
 </html>
