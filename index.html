@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#FAF7F2">
+<meta name="theme-color" content="#F4F1EC">
 <title>HOME · 我的理想家</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -11,158 +11,169 @@
 <link rel="apple-touch-icon" href="https://api.iconify.design/noto:house-with-garden.svg">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#FAF7F2;--card:#fff;--ink:#2E2A26;--ink2:#6B6259;--ink3:#A2988D;--line:#EFE8DD;--wood:#B08968;--wood-d:#8C6A4F;--cream:#F5EEE4;--green:#6E9276;--red:#BF6A5C;--r:16px}
+:root{
+  --bg: #F4F1EC; 
+  --card: #FFFFFF;
+  --ink: #3D3A36; 
+  --ink2: #736D65;
+  --ink3: #A69F96;
+  --line: #EBE5DC;
+  --wood: #B0957D; 
+  --wood-d: #8F7660;
+  --green: #8E9F8A; 
+  --red: #C48282;   
+  --cream: #F0EBE1;
+  --r: 16px;
+}
 html{-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.55;min-height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;min-height:100vh}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,select,textarea{font:inherit;color:inherit;outline:none}
-.wrap{max-width:1000px;margin:0 auto;padding:20px 16px 96px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.wrap{max-width:1000px;margin:0 auto;padding:16px 16px 100px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .brand{display:flex;gap:10px;align-items:center}
-.mark{width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#C9A886,#9C7657);color:#fff;display:grid;place-items:center;font-family:Georgia,serif;font-size:18px}
-.bname{font-family:Georgia,"Songti SC",serif;font-size:16px;font-weight:600;letter-spacing:.05em}
+.mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#C5B1A1,#A68F7D);color:#fff;display:grid;place-items:center;font-family:Georgia,serif;font-size:20px;box-shadow:0 4px 12px rgba(166,143,125,.2)}
+.bname{font-family:Georgia,"Songti SC",serif;font-size:17px;font-weight:600;letter-spacing:.05em;color:var(--ink)}
 .bsub{font-size:9px;letter-spacing:.16em;color:var(--ink3)}
-.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:none}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{padding:7px 13px;border-radius:99px;font-size:12.5px;color:var(--ink2);background:#fff;border:1px solid var(--line);white-space:nowrap}
-.tab.on{background:var(--wood);border-color:var(--wood);color:#fff;font-weight:600}
-.hero{background:linear-gradient(135deg,#FFFDFA,#F7EEE2 60%,#F0E2CF);border:1px solid #EFE3D3;border-radius:20px;padding:24px 20px;margin-bottom:14px}
-.hero .k{font-size:9.5px;letter-spacing:.2em;color:var(--wood);font-weight:600;margin-bottom:8px}
-.hero h1{font-family:Georgia,"Songti SC",serif;font-size:26px;letter-spacing:.08em}
-.hero .meta{font-size:12.5px;color:var(--ink2);margin-top:9px;display:flex;gap:8px;flex-wrap:wrap}
-.tag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.7);border:1px solid #EADCC9;padding:3px 10px;border-radius:99px;font-size:11.5px}
-.tag::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--green)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:14px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;transition:.2s;cursor:pointer;}
-.stat:hover{border-color:var(--wood);box-shadow:0 4px 12px rgba(176,137,104,.15);transform:translateY(-2px)}
-.stat .l{font-size:11px;color:var(--ink3)}
-.stat .v{font-size:20px;font-weight:600;margin-top:7px;font-variant-numeric:tabular-nums}
-.stat .v.sm{font-size:17px}
-.stat .s{font-size:10.5px;color:var(--ink3);margin-top:4px}
-.stat.acc{background:linear-gradient(145deg,#B08968,#96704F);border-color:transparent;color:#fff;cursor:default;}
-.stat.acc:hover{transform:none;box-shadow:none;}
-.stat.acc .l,.stat.acc .s{color:rgba(255,255,255,.75)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:14px}
-.ct{font-size:12.5px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:7px}
-.ct::before{content:"";width:3px;height:12px;border-radius:2px;background:var(--wood)}
-.ct .r{margin-left:auto;font-weight:400;font-size:11px;color:var(--ink3)}
-.bar{height:7px;border-radius:99px;background:var(--cream);overflow:hidden}
-.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#C9A886,#A9815C)}
-.bar i.w{background:linear-gradient(90deg,#D9A08F,#BF6A5C)}
-.brow{margin-bottom:14px;cursor:pointer;transition:.2s;padding:8px;border-radius:8px;margin-left:-8px;margin-right:-8px;}
-.brow:hover{background:var(--bg);}
-.brow:last-child{margin-bottom:0}
-.bh{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px}
-.bf{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink3);margin-top:5px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 15px;border-radius:11px;font-size:13px;font-weight:500;white-space:nowrap;transition:.2s}
-.btn.p{background:var(--wood);color:#fff}
-.btn.g{border:1px solid var(--line);background:#fff;color:var(--ink2)}
-.btn.t{padding:5px 10px;font-size:11.5px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink2)}
-.btn.x{padding:5px 10px;font-size:11.5px;border-radius:8px;background:#FBEDEB;color:var(--red)}
-.ops{display:flex;gap:6px;flex-wrap:wrap}
-.head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-.head .k{font-size:9.5px;letter-spacing:.18em;color:var(--wood);font-weight:600;margin-bottom:4px}
-.head h2{font-family:Georgia,"Songti SC",serif;font-size:21px}
-.mini{display:flex;gap:18px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px 16px;margin-bottom:13px}
-.mini div{display:flex;flex-direction:column;gap:2px}
-.mini span{font-size:10.5px;color:var(--ink3)}
-.mini b{font-size:15px;font-variant-numeric:tabular-nums}
-.rec{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 14px;margin-bottom:8px;flex-wrap:wrap;transition:.2s}
-.rec:hover{border-color:var(--wood);box-shadow:0 2px 8px rgba(176,137,104,.1);}
-.rec .l{flex:1;min-width:0}
-.rec .t{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rec .m{font-size:11px;color:var(--ink3);margin-top:2px}
-.rec .r{text-align:right;white-space:nowrap}
-.rec .a{font-weight:600;font-size:14px;font-variant-numeric:tabular-nums}
-.rec .st{font-size:10.5px;padding:3px 9px;border-radius:99px;background:var(--cream);white-space:nowrap}
-.tbl{overflow-x:auto;border-radius:13px;border:1px solid var(--line);background:#fff}
-table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
-th{text-align:left;font-weight:500;font-size:11px;color:var(--ink3);padding:11px 13px;background:#FCFAF6;border-bottom:1px solid var(--line);white-space:nowrap}
-td{padding:12px 13px;border-bottom:1px solid #F6F1E9}
-tr:last-child td{border-bottom:none}
-td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.over{color:var(--red);font-weight:600}
-.empty{text-align:center;padding:38px 16px;color:var(--ink3);font-size:13px}
-.empty .e{font-size:28px;opacity:.45;display:block;margin-bottom:8px}
-.tl{position:relative;padding-left:24px}
-.tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:1.5px;background:var(--line)}
-.tli{position:relative;margin-bottom:12px}
-.tld{position:absolute;left:-24px;top:16px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #DDD3C6;z-index:2}
-.tld.d{border-color:var(--wood);background:var(--wood)}
-.tld.f{border-color:var(--green);background:var(--green)}
-.tlc{background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px 15px}
-.tlt{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.tlt b{font-size:14px}
-.tldate{font-size:11px;color:var(--ink3);margin-top:4px}
-.pill{font-size:10.5px;padding:3px 9px;border-radius:99px;background:var(--cream)}
-.pill.d{background:rgba(176,137,104,.14);color:var(--wood-d)}
-.pill.f{background:rgba(110,146,118,.14);color:var(--green)}
-.roomgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}
-.room{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.2s}
-.room:hover{border-color:var(--wood);box-shadow:0 4px 12px rgba(176,137,104,.1)}
-.room.on{border-color:var(--wood);background:#FDFAF5}
-.room .rn{font-size:13px;font-weight:600}
-.room .ra{font-size:16px;font-weight:600;color:var(--wood-d);margin-top:6px}
-.room .rs{font-size:10.5px;color:var(--ink3);margin-top:2px}
-#mask{display:none;position:fixed;inset:0;background:rgba(46,42,38,.34);backdrop-filter:blur(3px);z-index:200}
-#mask.on{display:block}
-#modal{display:none;position:fixed;z-index:201;left:50%;top:50%;transform:translate(-50%,-50%);width:min(620px,calc(100vw - 24px));max-height:86vh;flex-direction:column;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 24px 70px rgba(46,42,38,.22)}
-#modal.on{display:flex}
-.mh{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px}
-.mh h3{font-family:Georgia,"Songti SC",serif;font-size:17px}
-.mb{padding:0 20px 8px;overflow-y:auto;flex:1}
-.mf{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px 18px;border-top:1px solid var(--line)}
-.form{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.f{display:flex;flex-direction:column;gap:5px}
-.f.s2{grid-column:1/-1}
-.f>span{font-size:11px;color:var(--ink3)}
-.f input,.f select,.f textarea{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#FDFCFA;font-size:14px}
-.f textarea{resize:vertical;min-height:55px;font-family:inherit}
-.tip{grid-column:1/-1;font-size:11.5px;color:var(--ink3);line-height:1.7;background:var(--cream);padding:9px 12px;border-radius:9px}
-.close{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:var(--ink3);font-size:13px}
-.bnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:90;padding:8px 6px calc(8px + env(safe-area-inset-bottom));align-items:center;justify-content:space-around}
-.bn{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:var(--ink3);padding:4px 10px;border-radius:10px}
-.bn span{font-size:17px;line-height:1}
-.bn.on{color:var(--wood-d)}
-.fab{width:48px;height:48px;border-radius:50%;flex:0 0 48px;background:linear-gradient(145deg,#C9A886,#9C7657);color:#fff;display:grid;place-items:center;font-size:23px;margin-top:-16px}
-#toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);background:rgba(46,42,38,.92);color:#fff;padding:10px 20px;border-radius:99px;font-size:12.5px;opacity:0;pointer-events:none;transition:.25s;z-index:300;white-space:nowrap}
-#toast.on{opacity:1;transform:translate(-50%,0)}
-.chart-wrap{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:center;margin-top:10px}
-.chart-box{position:relative;width:220px;height:220px;flex:0 0 220px}
-.chart-info{flex:1;min-width:200px;background:#FCFAF6;border-radius:12px;padding:16px;border:1px dashed var(--line);text-align:center;transition:all .3s;cursor:pointer;}
-.chart-info:hover{background:var(--cream);}
-.chart-info h4{font-size:16px;color:var(--wood-d);margin-bottom:8px}
-.chart-info .amt{font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px;font-variant-numeric:tabular-nums}
-.chart-info .pct{font-size:12px;color:var(--ink3)}
-.legend-list{display:flex;flex-direction:column;gap:8px;margin-top:16px;width:100%}
-.legend-item{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:8px 12px;border-radius:8px;cursor:pointer;transition:background .2s}
+.tab{padding:6px 14px;border-radius:99px;font-size:12.5px;color:var(--ink2);background:var(--card);border:1px solid var(--line);white-space:nowrap;transition:.2s}
+.tab.on{background:var(--wood);border-color:var(--wood);color:#fff;font-weight:500;box-shadow:0 4px 10px rgba(176,149,125,.2)}
+
+.hero{background:var(--card);border-radius:var(--r);padding:22px;margin-bottom:14px;box-shadow:0 4px 16px rgba(166,143,125,.05)}
+.hero .k{font-size:11.5px;color:var(--ink3);margin-bottom:8px;display:flex;justify-content:space-between;}
+.hero h1{font-family:Georgia,"Songti SC",serif;font-size:26px;letter-spacing:.02em;color:var(--wood-d)}
+.hero .meta{font-size:12px;color:var(--ink2);margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;gap:4px;background:var(--cream);padding:3px 10px;border-radius:99px;font-size:11px;color:var(--ink2)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:var(--card);border-radius:14px;padding:16px;transition:.2s;position:relative;box-shadow:0 2px 12px rgba(166,143,125,.04);}
+.stat.clickable{cursor:pointer}
+.stat.clickable:active{transform:scale(0.98)}
+.stat .l{font-size:11.5px;color:var(--ink3);display:flex;justify-content:space-between;}
+.stat .l span{color:var(--wood);font-size:10px;}
+.stat .v{font-size:20px;font-weight:600;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.stat .v.sm{font-size:16px}
+.stat .s{font-size:11px;color:var(--ink3);margin-top:4px}
+.stat.main{background:linear-gradient(135deg,#A68F7D,#8C7665);color:#fff;grid-column: span 2;box-shadow:0 6px 20px rgba(166,143,125,.2)}
+.stat.main .l,.stat.main .s{color:rgba(255,255,255,.75)}
+.stat.main .l span{color:#F4F1EC}
+.stat.main .v{font-size:26px;color:#fff;}
+.stat.acc{background:var(--cream);color:var(--wood-d)}
+
+.card{background:var(--card);border-radius:var(--r);padding:18px;margin-bottom:14px;box-shadow:0 2px 12px rgba(166,143,125,.04);}
+.ct{font-size:14.5px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.ct::before{content:"";width:3px;height:14px;border-radius:2px;background:var(--wood)}
+.ct .r{margin-left:auto;font-weight:400;font-size:11.5px;color:var(--ink3)}
+
+.chart-wrap{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:center}
+.chart-box{position:relative;width:180px;height:180px;flex:0 0 180px}
+.chart-info{flex:1;min-width:180px;background:var(--bg);border-radius:14px;padding:16px;text-align:center;transition:.3s;cursor:pointer;position:relative;border:1px solid var(--line);}
+.chart-info::after{content:"👆 点击切换数据";position:absolute;bottom:6px;left:0;right:0;font-size:10px;color:var(--ink3);}
+.chart-info h4{font-size:14px;color:var(--ink2);margin-bottom:6px}
+.chart-info .amt{font-size:22px;font-weight:600;color:var(--wood-d);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.chart-info .pct{font-size:11.5px;color:var(--ink3)}
+.legend-list{display:flex;flex-direction:column;gap:6px;margin-top:14px;width:100%}
+.legend-item{display:flex;align-items:center;justify-content:space-between;font-size:13px;padding:8px 10px;border-radius:8px;cursor:pointer;transition:.2s}
 .legend-item:hover{background:var(--bg)}
 .legend-left{display:flex;align-items:center;gap:8px}
-.legend-color{width:12px;height:12px;border-radius:3px}
+.legend-color{width:10px;height:10px;border-radius:50%}
 
-#loginOverlay{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;}
-.login-box{background:#fff;padding:30px;border-radius:20px;box-shadow:0 10px 40px rgba(46,42,38,.08);width:100%;max-width:340px;text-align:center;border:1px solid var(--line);}
-.login-box h2{font-family:Georgia,"Songti SC",serif;font-size:22px;color:var(--ink);margin-bottom:20px;letter-spacing:.05em;}
-.login-box input{width:100%;padding:12px 15px;border:1px solid var(--line);border-radius:12px;font-size:16px;margin-bottom:15px;text-align:center;letter-spacing:.2em;}
-.login-box input:focus{border-color:var(--wood);box-shadow:0 0 0 3px rgba(176,137,104,.1);}
-.login-box button{width:100%;padding:12px;background:var(--wood);color:#fff;border-radius:12px;font-size:15px;font-weight:600;transition:.2s;}
-.login-box button:hover{background:var(--wood-d);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:12px;font-size:13px;font-weight:500;transition:.2s}
+.btn.p{background:var(--wood);color:#fff;box-shadow:0 4px 12px rgba(176,149,125,.2)}
+.btn.p:active{transform:scale(0.96)}
+.btn.g{background:var(--cream);color:var(--wood-d)}
+.btn.t{padding:5px 10px;font-size:12px;border-radius:8px;background:var(--cream);color:var(--ink2)}
+.btn.x{padding:5px 10px;font-size:12px;border-radius:8px;background:#F7EAEA;color:var(--red)}
+
+.rec{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:14px;padding:14px;margin-bottom:8px;transition:.2s;border:1px solid var(--line);}
+.rec:hover{box-shadow:0 4px 16px rgba(166,143,125,.06);border-color:var(--wood)}
+.rec .l{flex:1;min-width:0}
+.rec .t{font-weight:600;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.rec .m{font-size:12px;color:var(--ink3);margin-top:2px}
+.rec .r{text-align:right;white-space:nowrap}
+.rec .a{font-weight:600;font-size:14.5px;font-variant-numeric:tabular-nums;color:var(--wood-d)}
+.rec .st{font-size:11px;padding:3px 8px;border-radius:6px;background:var(--cream);color:var(--ink2);white-space:nowrap}
+.ops{display:flex;gap:6px;}
+
+/* 进度卡片 */
+.prog-item { display:flex; align-items:center; justify-content:space-between; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:10px; transition:.2s; }
+.prog-item:hover { box-shadow:0 4px 12px rgba(166,143,125,.06); border-color:var(--wood); }
+.prog-left { display:flex; flex-direction:column; gap:6px; }
+.prog-name { font-size:15px; font-weight:600; color:var(--ink); }
+.prog-note { font-size:12px; color:var(--ink3); }
+.prog-status { font-size:12px; font-weight:500; padding:4px 12px; border-radius:99px; }
+.prog-status.done { background:#E8F0E8; color:var(--green); }
+.prog-status.doing { background:var(--cream); color:var(--wood-d); }
+.prog-status.todo { background:var(--bg); color:var(--ink3); }
+
+/* 房间与明细表 */
+.roomgrid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
+.room{background:var(--card);border-radius:14px;padding:14px;cursor:pointer;transition:.2s;flex:1 1 calc(33.333% - 10px);min-width:130px;box-shadow:0 2px 8px rgba(166,143,125,.04);border:1px solid var(--line);}
+.room:hover{border-color:var(--wood);box-shadow:0 4px 12px rgba(176,149,125,.1)}
+.room.on{border:1px solid var(--wood);background:var(--cream)}
+.room .rn{font-size:13.5px;font-weight:600;color:var(--ink); display:flex; align-items:center; gap:6px;}
+.room .ra{font-size:16px;font-weight:600;color:var(--wood-d);margin-top:4px}
+.room .rs{font-size:11px;color:var(--ink3);margin-top:2px}
+
+.tbl{overflow-x:auto;border-radius:12px;border:1px solid var(--line);background:var(--card);margin-top:10px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:100%;}
+th{text-align:left;font-weight:500;font-size:12px;color:var(--ink3);padding:12px 14px;background:var(--bg);border-bottom:1px solid var(--line);white-space:nowrap;}
+td{padding:14px;border-bottom:1px solid var(--line);color:var(--ink);}
+tr:last-child td{border-bottom:none;}
+tr:hover td { background: var(--bg); }
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+
+.bnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-top:1px solid var(--line);z-index:90;padding:8px 6px calc(8px + env(safe-area-inset-bottom));align-items:center;justify-content:space-around}
+.bn{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10.5px;color:var(--ink3);padding:4px 10px;border-radius:12px;transition:.2s}
+.bn span{font-size:18px;line-height:1}
+.bn.on{color:var(--wood-d);font-weight:600}
+.fab{width:48px;height:48px;border-radius:50%;flex:0 0 48px;background:linear-gradient(135deg,#C5B1A1,#A68F7D);color:#fff;display:grid;place-items:center;font-size:24px;box-shadow:0 6px 20px rgba(166,143,125,.3);margin-top:-16px;transition:.2s}
+
+#mask{display:none;position:fixed;inset:0;background:rgba(61,58,54,.4);backdrop-filter:blur(4px);z-index:200}
+#mask.on{display:block}
+#modal{display:none;position:fixed;z-index:201;left:50%;top:50%;transform:translate(-50%,-50%);width:min(600px,calc(100vw - 24px));max-height:85vh;flex-direction:column;background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(61,58,54,.15)}
+#modal.on{display:flex}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px}
+.mh h3{font-size:16px;font-weight:600;color:var(--ink)}
+.mb{padding:0 20px 10px;overflow-y:auto;flex:1}
+.mf{display:flex;justify-content:flex-end;gap:10px;padding:14px 20px 18px;background:var(--bg)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f{display:flex;flex-direction:column;gap:5px}
+.f.s2{grid-column:1/-1}
+.f>span{font-size:11.5px;color:var(--ink3)}
+.f input,.f select,.f textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:14px;transition:.2s;color:var(--ink)}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--wood);background:#fff}
+.close{width:28px;height:28px;border-radius:50%;background:var(--bg);display:grid;place-items:center;color:var(--ink3);font-size:13px}
+
+#loginOverlay{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;}
+.login-box{background:var(--card);padding:32px 24px;border-radius:20px;box-shadow:0 10px 40px rgba(166,143,125,.1);width:100%;max-width:320px;text-align:center;}
+.login-box h2{font-family:Georgia,serif;font-size:22px;margin-bottom:20px;color:var(--wood-d)}
+.login-box input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font-size:15px;margin-bottom:14px;text-align:center;letter-spacing:.2em;background:var(--bg);color:var(--ink)}
+.login-box button{width:100%;padding:12px;background:var(--wood);color:#fff;border-radius:12px;font-size:15px;font-weight:600;transition:.2s}
 .login-box p{font-size:12px;color:var(--red);margin-top:10px;height:16px;}
 
 .group-title{font-size:13.5px;font-weight:600;color:var(--wood-d);margin:16px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;}
 .group-title:first-child{margin-top:0;}
 .group-subtotal{font-size:12px;color:var(--ink3);font-weight:400;}
 
-@media(max-width:600px){.form{grid-template-columns:1fr}.hero h1{font-size:23px}.head h2{font-size:19px}.rec .l{flex-basis:100%}.rec .r{text-align:left;flex:1}.rec .st{margin-left:auto}.chart-wrap{flex-direction:column}.chart-info{width:100%}}
+#confirmModal{display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;background:rgba(61,58,54,.4);backdrop-filter:blur(4px);}
+#confirmModal.on{display:flex;}
+.confirm-box{background:var(--card);width:min(300px, 80vw);border-radius:16px;padding:20px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.1);}
+.confirm-box h3{font-size:16px;margin-bottom:10px;color:var(--red);}
+.confirm-box p{font-size:13px;color:var(--ink2);margin-bottom:20px;line-height:1.6;}
+.confirm-box .btns{display:flex;gap:10px;justify-content:center;}
+
+@media(max-width:600px){.form{grid-template-columns:1fr}.stat.main{grid-column:span 2}.chart-wrap{flex-direction:column}.chart-info{width:100%}.room{flex:1 1 calc(50% - 10px);}}
 </style>
 </head>
 <body>
 
 <div id="loginOverlay">
   <div class="login-box">
-    <h2>HOME · 我的理想家</h2>
-    <input type="password" id="pwdInput" placeholder="请输入访问密码" onkeypress="if(event.key==='Enter') checkPwd()">
-    <button onclick="checkPwd()">进入系统</button>
+    <h2>我的理想家</h2>
+    <input type="password" id="pwdInput" placeholder="请输入密码" onkeypress="if(event.key==='Enter') checkPwd()">
+    <button onclick="checkPwd()">安全登录</button>
     <p id="loginErr"></p>
   </div>
 </div>
@@ -170,38 +181,38 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 <div class="wrap" id="appWrap" style="display:none;">
   <div class="top">
     <div class="brand"><div class="mark">H</div><div><div class="bname">我的理想家</div><div class="bsub">HOME RENOVATION</div></div></div>
-    <div class="ops">
-      <button class="btn g" onclick="cloudRefresh()">☁ 刷新</button>
-      <button class="btn g" onclick="exportCSV()">导出CSV</button>
+    <div class="ops" style="display:flex;gap:6px;">
+      <button class="btn g" onclick="cloudRefresh()">☁ 同步</button>
+      <button class="btn g" onclick="exportCSV()">导出</button>
     </div>
   </div>
   
   <div class="tabs" id="tabs">
     <button class="tab on" data-tab="home">总览</button>
     <button class="tab" data-tab="budget">预算</button>
-    <button class="tab" data-tab="house">购房费用</button>
+    <button class="tab" data-tab="house">购房</button>
     <button class="tab" data-tab="rooms">房间</button>
     <button class="tab" id="renoBtn" onclick="toggleRenoMenu()">装修 ▾</button>
-    <button class="tab" data-tab="progress">施工进度</button>
-    <button class="tab" data-tab="changes">其他费用</button>
+    <button class="tab" data-tab="progress">进度</button>
+    <button class="tab" data-tab="changes">其他</button>
   </div>
   
-  <div id="renoSubMenu" style="display:none; margin-bottom:16px; padding:12px; background:#FDFCFA; border:1px solid var(--line); border-radius:14px;">
-    <div style="display:flex; gap:16px; overflow-x:auto; scrollbar-width:none; align-items:flex-start; padding-bottom:6px;">
-      <div style="flex:1; min-width:130px;">
+  <div id="renoSubMenu" style="display:none; margin-bottom:14px; padding:12px; background:var(--card); border-radius:14px; box-shadow:0 4px 12px rgba(166,143,125,.04); border:1px solid var(--line);">
+    <div style="display:flex; gap:16px; overflow-x:auto; align-items:flex-start; padding-bottom:4px;">
+      <div style="flex:1; min-width:100px;">
         <div style="font-size:10.5px; color:var(--ink3); margin-bottom:6px; font-weight:600;">软装与定制</div>
         <div style="display:flex; flex-direction:column; gap:6px;">
           <button class="tab" style="text-align:left;" data-tab="custom">全屋定制</button>
           <button class="tab" style="text-align:left;" data-tab="furniture">家具软装</button>
         </div>
       </div>
-      <div style="flex:1; min-width:100px;">
+      <div style="flex:1; min-width:80px;">
         <div style="font-size:10.5px; color:var(--ink3); margin-bottom:6px; font-weight:600;">家电</div>
         <div style="display:flex; flex-direction:column; gap:6px;">
           <button class="tab" style="text-align:left;" data-tab="appliance">家电采购</button>
         </div>
       </div>
-      <div style="flex:1; min-width:130px;">
+      <div style="flex:1; min-width:100px;">
         <div style="font-size:10.5px; color:var(--ink3); margin-bottom:6px; font-weight:600;">硬装施工</div>
         <div style="display:flex; flex-direction:column; gap:6px;">
           <button class="tab" style="text-align:left;" data-tab="material">主材辅材</button>
@@ -220,28 +231,40 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <div class="bn" data-tab="progress"><span>📅</span>进度</div>
   <div class="bn" onclick="showMore()"><span>☰</span>更多</div>
 </div>
+
 <div id="mask" onclick="closeModal()"></div>
 <div id="modal">
   <div class="mh"><h3 id="mtitle">详情</h3><button class="close" onclick="closeModal()">✕</button></div>
   <div class="mb"><form id="mform" class="form" autocomplete="off"></form></div>
-  <div class="mf"><button class="btn g" onclick="closeModal()">关闭</button><button class="btn p" id="msave" style="display:none;">保存</button></div>
+  <div class="mf"><button class="btn g" onclick="closeModal()">取消</button><button class="btn p" id="msave" style="display:none;">保存</button></div>
 </div>
+
+<div id="confirmModal">
+  <div class="confirm-box">
+    <h3>⚠️ 确认删除</h3>
+    <p id="confirmMsg">确定要删除这条记录吗？删除后将无法恢复。</p>
+    <div class="btns">
+      <button class="btn g" onclick="closeConfirm()">取消</button>
+      <button class="btn x" id="confirmBtn" style="color:#fff; background:var(--red);">确认删除</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* =====================================================
-   ★ 配置区：请填入你自己的密钥 ★
-   ===================================================== */
 const SUPABASE_URL = 'https://xzqemukyazhwoqmqvogf.supabase.co'; 
 const SUPABASE_KEY = 'sb_publishable_g-N80wXBYPxEcAx05wGLBw_p27Al2DC';
-
-// 密码配置 (默认密码是 123456)
 const PWD_HASH = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'; 
-/* ===================================================== */
 
 const KEY='home_reno_cloud_v1';
 const ROOMS=['全屋','玄关','客厅','餐厅','厨房','主卧','次卧','儿童房','书房','主卫','次卫','阳台','储物间','未分类'];
+const ROOM_ICONS={
+  '全屋':'🏠','玄关':'🚪','客厅':'🛋️','餐厅':'🍽️','厨房':'🍳',
+  '主卧':'👑','次卧':'🛏️','儿童房':'🧸','书房':'📚','主卫':'🛁',
+  '次卫':'🚿','阳台':'🌿','储物间':'📦','未分类':'🏷️'
+};
 const MODULES={house:'购房费用', material:'主材辅材', labor:'人工费', appliance:'家电采购', furniture:'家具软装', custom:'全屋定制'};
 const STATUS=['待下单', '已付款', '待发货', '已到货(待安装)', '安装中', '已完成'];
 const CHANNELS=['线下实体店','淘宝','京东','拼多多','天猫','抖音','1688','其他'];
@@ -266,7 +289,6 @@ async function sha256(message) {
 async function checkPwd() {
   const pwd = document.getElementById('pwdInput').value;
   const hash = await sha256(pwd);
-  
   if (hash === PWD_HASH) {
     document.getElementById('loginOverlay').style.display = 'none';
     document.getElementById('appWrap').style.display = 'block';
@@ -281,6 +303,7 @@ let db = null;
 let S=def(),tab='home',roomFocus=null;
 let chartData = []; 
 let payerChartData = [];
+let chartMode = 'spent';
 
 function def(){return{
   updatedAt:0,
@@ -304,7 +327,7 @@ async function cloudLoad(){
     const { data, error } = await db.from('reno_data').select('content').eq('id', 1).single();
     if (error) throw error;
     return (data && data.content) ? data.content : null;
-  }catch(e){ console.warn('cloud load fail', e); return null; }
+  }catch(e){ return null; }
 }
 
 async function cloudPush(){
@@ -312,7 +335,7 @@ async function cloudPush(){
   try{
     const { error } = await db.from('reno_data').update({ content: S }).eq('id', 1);
     return !error;
-  }catch(e){ console.warn('cloud push fail', e); return false; }
+  }catch(e){ return false; }
 }
 
 function save(){
@@ -320,29 +343,32 @@ function save(){
   saveLocal();
   render();
   if(db) {
+    toast('⏳ 正在同步云端...');
     cloudPush().then(ok=>{
-      if(!ok) toast('云端保存失败，已存本地');
+      if(ok) toast('✅ 云端同步成功');
+      else toast('❌ 云端同步失败，已存本地');
     });
+  } else {
+    toast('💾 已保存到本地');
   }
 }
 
 async function cloudRefresh(){
   if(!db){toast('未配置云端，请填 URL 和 Key');return}
-  toast('同步中…');
+  toast('⏳ 正在拉取...');
   const remote=await cloudLoad();
   if(!remote){toast('拉取失败');return}
   if((remote.updatedAt||0)>(S.updatedAt||0)){
     S=Object.assign(def(),remote);
-    saveLocal();render();toast('已同步云端最新数据');
+    saveLocal();render();toast('✅ 已同步云端最新数据');
   }else{
-    toast('已是最新');
+    toast('✅ 已是最新');
   }
 }
 
 async function init(){
   const local = loadLocal();
   if(local) S = Object.assign(def(), local);
-
   if(SUPABASE_URL.startsWith('http')){
     db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     const remote = await cloudLoad();
@@ -351,18 +377,13 @@ async function init(){
         S = Object.assign(def(), remote);
       }
     } else {
-      if(S.items && S.items.length > 0) {
-        await cloudPush();
-      }
+      if(S.items && S.items.length > 0) await cloudPush();
     }
-    
-    db.channel('reno-sync').on('postgres_changes',
-      { event: 'UPDATE', schema: 'public', table: 'reno_data' },
+    db.channel('reno-sync').on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'reno_data' },
       payload => { 
         if (payload.new && payload.new.content) { 
           S = payload.new.content; 
-          saveLocal(); 
-          render(); 
+          saveLocal(); render(); 
         } 
       }
     ).subscribe();
@@ -397,13 +418,9 @@ function toggleRenoMenu() {
   if (menu.style.display === 'none') {
     menu.style.display = 'block';
     btn.innerHTML = '装修 ▴';
-    btn.style.background = 'var(--wood-l)';
-    btn.style.color = 'var(--wood-d)';
   } else {
     menu.style.display = 'none';
     btn.innerHTML = '装修 ▾';
-    btn.style.background = '#fff';
-    btn.style.color = 'var(--ink2)';
   }
 }
 
@@ -421,10 +438,7 @@ function render(){
   else v.innerHTML=moduleView(tab);
   
   if(tab==='home') {
-    setTimeout(() => {
-      drawChart();
-      drawPayerChart();
-    }, 50);
+    setTimeout(() => { drawChart(); drawPayerChart(); }, 50);
   }
 }
 
@@ -448,13 +462,14 @@ function showList(title, items) {
 
     html += sortedKeys.map(groupName => {
       const g = groups[groupName];
+      const icon = ROOM_ICONS[groupName] || '🏷️';
       return `
         <div class="group-title">
-          <span>🏠 ${esc(groupName)}</span>
+          <span>${icon} ${esc(groupName)}</span>
           <span class="group-subtotal">小计: ${fmt(g.total)}</span>
         </div>
         ${g.list.map(i => `
-          <div class="rec" style="margin-bottom:8px; padding:10px;">
+          <div class="rec" style="margin-bottom:10px; padding:12px; border:1px solid var(--line);">
             <div class="l">
               <div class="t">${esc(i.name)}</div>
               <div class="m">${i.payer?'💰'+esc(i.payer)+' ':''} ${i.status?'📌'+esc(i.status):''}</div>
@@ -476,12 +491,21 @@ function showList(title, items) {
 }
 
 function resetChartInfo() {
-  const totalBudget = chartData.reduce((s, item) => s + item.budget, 0);
-  document.getElementById('chartInfo').innerHTML = `
-    <h4>总投入预算</h4>
-    <div class="amt">${fmt(totalBudget)}</div>
-    <div class="pct">点击图表或列表查看分类</div>
-  `;
+  if (chartMode === 'spent') {
+    const totalSpent = chartData.reduce((s, item) => s + item.value, 0);
+    document.getElementById('chartInfo').innerHTML = `
+      <h4>实际总支出</h4>
+      <div class="amt">${fmt(totalSpent)}</div>
+      <div class="pct">当前显示：实际花费占比</div>
+    `;
+  } else {
+    const totalBudget = chartData.reduce((s, item) => s + item.budget, 0);
+    document.getElementById('chartInfo').innerHTML = `
+      <h4>总投入预算</h4>
+      <div class="amt">${fmt(totalBudget)}</div>
+      <div class="pct">当前显示：预算占比</div>
+    `;
+  }
   document.querySelectorAll('#legendList .legend-item').forEach(el => el.style.background = 'transparent');
 }
 
@@ -490,7 +514,7 @@ function resetPayerInfo() {
   document.getElementById('payerInfo').innerHTML = `
     <h4>支付总额</h4>
     <div class="amt">${fmt(totalValue)}</div>
-    <div class="pct">点击图表或列表查看明细</div>
+    <div class="pct">点击头像查看明细</div>
   `;
   document.querySelectorAll('#payerLegendList .legend-item').forEach(el => el.style.background = 'transparent');
 }
@@ -502,299 +526,207 @@ function home(){
   const pct=t.budget?Math.min(100,t.total/t.budget*100):0;
   
   const cloudStatus = db
-    ? `<span style="font-size:10.5px;color:var(--green)">● 云端已连接 (实时同步)</span>`
-    : `<span style="font-size:10.5px;color:var(--red)">● 未连云端 (仅本地)</span>`;
+    ? `<span style="font-size:11px;color:var(--green)">● 已实时云同步</span>`
+    : `<span style="font-size:11px;color:var(--red)">● 仅本地存储</span>`;
     
-  return `<div class="hero"><div class="k">HOME RENOVATION MANAGEMENT</div><h1>${esc(m.title)}</h1><div class="meta"><span class="tag">${esc(m.status)}</span><span>${esc(m.area)}</span><span>·</span><span>${esc(m.type)}</span></div><div class="ops" style="margin-top:14px"><button class="btn p" onclick="openAdd()">＋ 新增支出</button><button class="btn g" onclick="openBudget()">调整预算</button><button class="btn g" onclick="cloudRefresh()">☁ 手动刷新</button></div><div style="margin-top:10px">${cloudStatus}</div></div>
+  return `<div class="hero">
+    <div class="k"><span>我的理想家</span>${cloudStatus}</div>
+    <h1>${esc(m.title)}</h1>
+    <div class="meta">
+      <span class="tag">${esc(m.status)}</span>
+      <span class="tag">${esc(m.area)}</span>
+      <span class="tag">${esc(m.type)}</span>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="btn p" style="flex:1" onclick="openAdd()">＋ 记一笔</button>
+      <button class="btn g" onclick="openBudget()">调预算</button>
+    </div>
+  </div>
+  
   <div class="grid">
-    <div class="stat acc"><div class="l">总投入预算</div><div class="v">${fmt(t.budget)}</div><div class="s">购房 · 硬装 · 软装 · 家电</div></div>
-    
-    <div class="stat clickable" onclick="showList('全部支出明细', [...S.items, ...S.changes])">
-      <div class="l">累计总支出</div>
-      <div class="v ${t.total?'':'sm'}">${t.total?fmt(t.total):'待录入'}</div>
-      <div class="s" style="color:var(--wood-d); font-weight:600;">购房 ${fmt(houseSpent)} | 装修 ${fmt(renoSpent)}</div>
+    <div class="stat main clickable" onclick="showList('全部支出明细', [...S.items, ...S.changes])">
+      <div class="l">累计总支出 <span>明细 👉</span></div>
+      <div class="v">${t.total?fmt(t.total):'待录入'}</div>
+      <div class="s">购房 ${fmt(houseSpent)} | 装修 ${fmt(renoSpent)}</div>
     </div>
     
-    <div class="stat"><div class="l">剩余可用预算</div><div class="v ${t.remaining<0?'over':''}">${fmt(t.remaining)}</div><div class="s">总预算 − 实际支出</div></div>
+    <div class="stat acc">
+      <div class="l">总投入预算</div>
+      <div class="v">${fmt(t.budget)}</div>
+      <div class="s">已使用 ${pct.toFixed(1)}%</div>
+    </div>
     
     <div class="stat clickable" onclick="showList('家电已到货项目', S.items.filter(i=>i.module==='appliance' && (i.status.includes('已到货')||i.status.includes('安装中')||i.status.includes('已完成'))))">
-      <div class="l">家电已到货</div><div class="v">${t.arrived} 项</div><div class="s">含安装中/已完成</div>
+      <div class="l">家电已到货 <span>👉</span></div>
+      <div class="v">${t.arrived} <span style="font-size:12px;font-weight:400">项</span></div>
     </div>
     
     <div class="stat clickable" onclick="showList('家电已安装项目', S.items.filter(i=>i.module==='appliance' && (i.status.includes('安装中')||i.status.includes('已完成'))))">
-      <div class="l">家电已安装</div><div class="v">${t.installed} 项</div><div class="s">含安装中/已完成</div>
+      <div class="l">家电已安装 <span>👉</span></div>
+      <div class="v">${t.installed} <span style="font-size:12px;font-weight:400">项</span></div>
     </div>
   </div>
   
   <div class="card">
-    <div class="ct">费用组成分析<span class="r">点击列表查看分类</span></div>
+    <div class="ct">资金流向看板</div>
     <div class="chart-wrap">
       <div class="chart-box">
-        <canvas id="expenseChart" width="220" height="220" style="cursor:pointer;" onclick="handleChartClick(event)"></canvas>
+        <canvas id="expenseChart" width="180" height="180" style="cursor:pointer;" onclick="handleChartClick(event)"></canvas>
       </div>
-      <div class="chart-info" id="chartInfo" onclick="resetChartInfo()">
-        <h4>总投入预算</h4>
-        <div class="amt">${fmt(t.budget)}</div>
-        <div class="pct">点击图表或列表查看分类</div>
+      <div class="chart-info" id="chartInfo" onclick="toggleChartMode()">
+        <h4>实际总支出</h4>
+        <div class="amt">${fmt(t.total)}</div>
+        <div class="pct">当前显示：实际花费占比</div>
       </div>
     </div>
     <div class="legend-list" id="legendList"></div>
   </div>
 
   <div class="card">
-    <div class="ct">支付人汇总分析<span class="r">点击列表查看明细</span></div>
+    <div class="ct">家庭贡献榜</div>
     <div class="chart-wrap">
       <div class="chart-box">
-        <canvas id="payerChart" width="220" height="220" style="cursor:pointer;" onclick="handlePayerClick(event)"></canvas>
+        <canvas id="payerChart" width="180" height="180" style="cursor:pointer;" onclick="handlePayerClick(event)"></canvas>
       </div>
       <div class="chart-info" id="payerInfo" onclick="resetPayerInfo()">
         <h4>支付总额</h4>
         <div class="amt">${fmt(t.total)}</div>
-        <div class="pct">点击图表或列表查看明细</div>
+        <div class="pct">点击头像查看明细</div>
       </div>
     </div>
     <div class="legend-list" id="payerLegendList"></div>
-  </div>
-  
-  <div class="card"><div class="ct">预算使用概览<span class="r">已使用 ${pct.toFixed(0)}%</span></div><div class="bar" style="height:9px"><i class="${t.remaining<0?'w':''}" style="width:${pct}%"></i></div><div class="bf" style="margin-top:8px"><span>已支出 ${fmt(t.total)}</span><span>剩余 ${fmt(t.remaining)}</span></div></div>
-  <div class="card"><div class="ct">数据说明</div><div style="font-size:12.5px;color:var(--ink2);line-height:1.9">${db?'数据已连接云端，家人打开同一网址即可实时共享。':'未连云端。请按教程配置 Supabase。'}<br>最近更新：${S.updatedAt?new Date(S.updatedAt).toLocaleString('zh-CN'):'—'}</div></div>`;
+  </div>`;
+}
+
+function toggleChartMode() {
+  chartMode = chartMode === 'spent' ? 'budget' : 'spent';
+  drawChart();
 }
 
 function drawChart() {
-  const canvas = document.getElementById('expenseChart');
-  if (!canvas) return;
+  const canvas = document.getElementById('expenseChart'); if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  
   const otherSpent = S.changes.reduce((s,x)=>s+num(x.amount),0);
-  chartData = S.budget.cats.map(cat => {
-    return { name: cat.name, budget: cat.amount, value: catPaid(cat), color: '', items: S.items.filter(i=>cat.mods.includes(i.module)) };
-  });
+  
+  chartData = S.budget.cats.map(cat => ({ name: cat.name, budget: cat.amount, value: catPaid(cat), color: '', items: S.items.filter(i=>cat.mods.includes(i.module)) }));
   chartData.push({ name: '其他费用', budget: otherSpent, value: otherSpent, color: '', items: S.changes });
   
-  const totalBudget = chartData.reduce((s, d) => s + d.budget, 0);
-  const colors = ['#B08968', '#6E9276', '#5B8AA6', '#7A6FA8', '#BF6A5C', '#A2988D', '#E2D8C9'];
+  const dataToUse = chartMode === 'spent' ? chartData.map(d => d.value) : chartData.map(d => d.budget);
+  const totalValue = dataToUse.reduce((s, v) => s + v, 0);
   
-  ctx.clearRect(0, 0, 220, 220);
-  
-  if (totalBudget === 0) {
-    ctx.fillStyle = '#A2988D';
-    ctx.font = '14px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('暂无预算数据', 110, 110);
-    return;
-  }
-  
+  const colors = ['#B0957D', '#8E9F8A', '#889BA8', '#968E9F', '#C48282', '#A69F96'];
+  ctx.clearRect(0, 0, 180, 180);
+  if (totalValue === 0) return;
   let startAngle = -Math.PI / 2;
   
   chartData.forEach((d, i) => {
-    const sliceAngle = (d.budget / totalBudget) * 2 * Math.PI;
-    d.color = colors[i % colors.length];
-    d.startAngle = startAngle;
-    d.endAngle = startAngle + sliceAngle;
-    
-    ctx.beginPath();
-    ctx.moveTo(110, 110);
-    ctx.arc(110, 110, 100, startAngle, startAngle + sliceAngle);
-    ctx.closePath();
-    ctx.fillStyle = d.color;
-    ctx.fill();
-    ctx.strokeStyle = '#fff';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    
+    const val = chartMode === 'spent' ? d.value : d.budget;
+    if (val === 0) return;
+    const sliceAngle = (val / totalValue) * 2 * Math.PI;
+    d.color = colors[i % colors.length]; d.startAngle = startAngle; d.endAngle = startAngle + sliceAngle;
+    ctx.beginPath(); ctx.moveTo(90, 90); ctx.arc(90, 90, 80, startAngle, startAngle + sliceAngle);
+    ctx.closePath(); ctx.fillStyle = d.color; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
     startAngle += sliceAngle;
   });
-  
-  ctx.beginPath();
-  ctx.arc(110, 110, 65, 0, Math.PI * 2);
-  ctx.fillStyle = '#fff';
-  ctx.fill();
+  ctx.beginPath(); ctx.arc(90, 90, 55, 0, Math.PI * 2); ctx.fillStyle = '#F4F1EC'; ctx.fill();
   
   const legend = document.getElementById('legendList');
-  legend.innerHTML = chartData.map((d, i) => `
+  legend.innerHTML = chartData.map((d, i) => {
+    const val = chartMode === 'spent' ? d.value : d.budget;
+    if (val === 0) return '';
+    return `
     <div class="legend-item" id="legend-${i}" onclick="showChartInfo(${i})">
       <div class="legend-left"><div class="legend-color" style="background:${d.color}"></div>${d.name}</div>
-      <div style="text-align:right">
-        <div style="font-weight:600">预算 ${fmt(d.budget)}</div>
-        <div style="font-size:11px;color:var(--ink3)">已花 ${fmt(d.value)}</div>
-      </div>
-    </div>
-  `).join('');
-  
+      <div style="text-align:right"><div style="font-weight:600">${chartMode === 'spent' ? '已花' : '预算'} ${fmt(val)}</div></div>
+    </div>`;
+  }).join('');
   resetChartInfo();
 }
 
 function handleChartClick(e) {
-  const canvas = document.getElementById('expenseChart');
-  if (!canvas || chartData.length === 0) return;
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  
-  const dx = x - 110;
-  const dy = y - 110;
-  const dist = Math.sqrt(dx*dx + dy*dy);
-  
-  if (dist > 65 && dist < 100) {
-    let angle = Math.atan2(dy, dx);
-    if (angle < -Math.PI/2) angle += Math.PI * 2;
-    
+  const canvas = document.getElementById('expenseChart'); if (!canvas || chartData.length === 0) return;
+  const rect = canvas.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+  const dx = x - 90; const dy = y - 90; const dist = Math.sqrt(dx*dx + dy*dy);
+  if (dist > 55 && dist < 80) {
+    let angle = Math.atan2(dy, dx); if (angle < -Math.PI/2) angle += Math.PI * 2;
     for (let i = 0; i < chartData.length; i++) {
-      const d = chartData[i];
-      if (angle >= d.startAngle && angle < d.endAngle) {
-        showChartInfo(i);
-        break;
-      }
+      const d = chartData[i]; if (angle >= d.startAngle && angle < d.endAngle) { showChartInfo(i); break; }
     }
-  } else {
-    resetChartInfo();
-  }
+  } else { resetChartInfo(); }
 }
 
 function showChartInfo(index) {
-  const d = chartData[index];
-  if (!d) return;
-  
+  const d = chartData[index]; if (!d) return;
+  const totalSpent = chartData.reduce((s, item) => s + item.value, 0);
   const totalBudget = chartData.reduce((s, item) => s + item.budget, 0);
-  const pct = totalBudget > 0 ? ((d.budget / totalBudget) * 100).toFixed(1) : 0;
-  const remain = d.budget - d.value;
+  const pct = chartMode === 'spent' ? (totalSpent > 0 ? ((d.value / totalSpent) * 100).toFixed(1) : 0) : (totalBudget > 0 ? ((d.budget / totalBudget) * 100).toFixed(1) : 0);
   
   document.getElementById('chartInfo').innerHTML = `
     <h4 style="color:${d.color}">${d.name}</h4>
-    <div style="font-size:14px;color:var(--ink2);margin-bottom:4px">预算：${fmt(d.budget)} (${pct}%)</div>
-    <div class="amt" style="color:${remain<0?'var(--red)':'var(--green)'}">已花：${fmt(d.value)}</div>
-    <div class="pct">点击查看明细清单</div>
+    <div style="font-size:13px;color:var(--ink3);margin-bottom:4px">${chartMode === 'spent' ? '花费占比' : '预算占比'}: ${pct}%</div>
+    <div class="amt" style="color:var(--ink);font-size:18px">${chartMode === 'spent' ? '已花' : '预算'}: ${fmt(chartMode === 'spent' ? d.value : d.budget)}</div>
   `;
-  
   document.querySelectorAll('#legendList .legend-item').forEach(el => el.style.background = 'transparent');
   const el = document.getElementById('legend-' + index);
   if (el) el.style.background = 'var(--cream)';
-  
   document.getElementById('chartInfo').onclick = () => showList(d.name + ' 明细', d.items);
 }
 
 function drawPayerChart() {
-  const canvas = document.getElementById('payerChart');
-  if (!canvas) return;
+  const canvas = document.getElementById('payerChart'); if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  
   const payerMap = {};
-  S.items.forEach(i=>{
-    const payer = i.payer || '未指定';
-    payerMap[payer] = (payerMap[payer] || 0) + paid(i);
-  });
-  S.changes.forEach(c=>{
-    const payer = c.payer || '未指定';
-    payerMap[payer] = (payerMap[payer] || 0) + num(c.amount);
-  });
-
-  payerChartData = Object.keys(payerMap).map(name => {
-    let items = S.items.filter(i => (i.payer||'未指定') === name);
-    let changes = S.changes.filter(c => (c.payer||'未指定') === name);
-    return {
-      name: name,
-      value: payerMap[name],
-      color: '',
-      items: [...items, ...changes]
-    };
-  });
-
+  S.items.forEach(i=>{ const payer = i.payer || '未指定'; payerMap[payer] = (payerMap[payer] || 0) + paid(i); });
+  S.changes.forEach(c=>{ const payer = c.payer || '未指定'; payerMap[payer] = (payerMap[payer] || 0) + num(c.amount); });
+  payerChartData = Object.keys(payerMap).map(name => ({ name: name, value: payerMap[name], color: '', items: [...S.items.filter(i => (i.payer||'未指定') === name), ...S.changes.filter(c => (c.payer||'未指定') === name)] }));
+  
   const totalValue = payerChartData.reduce((s, d) => s + d.value, 0);
-  const colors = ['#5B8AA6', '#BF6A5C', '#6E9276', '#7A6FA8', '#B08968', '#A2988D'];
-  
-  ctx.clearRect(0, 0, 220, 220);
-  
-  if (totalValue === 0) {
-    ctx.fillStyle = '#A2988D';
-    ctx.font = '14px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('暂无支出数据', 110, 110);
-    return;
-  }
-  
+  const colors = ['#B0957D', '#889BA8', '#8E9F8A', '#968E9F', '#C48282', '#A69F96'];
+  ctx.clearRect(0, 0, 180, 180);
+  if (totalValue === 0) return;
   let startAngle = -Math.PI / 2;
   
   payerChartData.forEach((d, i) => {
     const sliceAngle = (d.value / totalValue) * 2 * Math.PI;
-    d.color = colors[i % colors.length];
-    d.startAngle = startAngle;
-    d.endAngle = startAngle + sliceAngle;
-    
-    ctx.beginPath();
-    ctx.moveTo(110, 110);
-    ctx.arc(110, 110, 100, startAngle, startAngle + sliceAngle);
-    ctx.closePath();
-    ctx.fillStyle = d.color;
-    ctx.fill();
-    ctx.strokeStyle = '#fff';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    
+    d.color = colors[i % colors.length]; d.startAngle = startAngle; d.endAngle = startAngle + sliceAngle;
+    ctx.beginPath(); ctx.moveTo(90, 90); ctx.arc(90, 90, 80, startAngle, startAngle + sliceAngle);
+    ctx.closePath(); ctx.fillStyle = d.color; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
     startAngle += sliceAngle;
   });
+  ctx.beginPath(); ctx.arc(90, 90, 55, 0, Math.PI * 2); ctx.fillStyle = '#F4F1EC'; ctx.fill();
   
-  ctx.beginPath();
-  ctx.arc(110, 110, 65, 0, Math.PI * 2);
-  ctx.fillStyle = '#fff';
-  ctx.fill();
-  
-  const legend = document.getElementById('payerLegendList');
-  legend.innerHTML = payerChartData.map((d, i) => `
+  document.getElementById('payerLegendList').innerHTML = payerChartData.map((d, i) => `
     <div class="legend-item" id="payer-legend-${i}" onclick="showPayerInfo(${i})">
       <div class="legend-left"><div class="legend-color" style="background:${d.color}"></div>${d.name}</div>
-      <div style="text-align:right">
-        <div style="font-weight:600">${fmt(d.value)}</div>
-      </div>
+      <div style="text-align:right"><div style="font-weight:600">${fmt(d.value)}</div></div>
     </div>
   `).join('');
-  
   resetPayerInfo();
 }
 
 function handlePayerClick(e) {
-  const canvas = document.getElementById('payerChart');
-  if (!canvas || payerChartData.length === 0) return;
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  
-  const dx = x - 110;
-  const dy = y - 110;
-  const dist = Math.sqrt(dx*dx + dy*dy);
-  
-  if (dist > 65 && dist < 100) {
-    let angle = Math.atan2(dy, dx);
-    if (angle < -Math.PI/2) angle += Math.PI * 2;
-    
+  const canvas = document.getElementById('payerChart'); if (!canvas || payerChartData.length === 0) return;
+  const rect = canvas.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+  const dx = x - 90; const dy = y - 90; const dist = Math.sqrt(dx*dx + dy*dy);
+  if (dist > 55 && dist < 80) {
+    let angle = Math.atan2(dy, dx); if (angle < -Math.PI/2) angle += Math.PI * 2;
     for (let i = 0; i < payerChartData.length; i++) {
-      const d = payerChartData[i];
-      if (angle >= d.startAngle && angle < d.endAngle) {
-        showPayerInfo(i);
-        break;
-      }
+      const d = payerChartData[i]; if (angle >= d.startAngle && angle < d.endAngle) { showPayerInfo(i); break; }
     }
-  } else {
-    resetPayerInfo();
-  }
+  } else { resetPayerInfo(); }
 }
 
 function showPayerInfo(index) {
-  const d = payerChartData[index];
-  if (!d) return;
-  
+  const d = payerChartData[index]; if (!d) return;
   const totalValue = payerChartData.reduce((s, item) => s + item.value, 0);
   const pct = totalValue > 0 ? ((d.value / totalValue) * 100).toFixed(1) : 0;
-  
   document.getElementById('payerInfo').innerHTML = `
     <h4 style="color:${d.color}">${d.name}</h4>
-    <div class="amt">${fmt(d.value)}</div>
-    <div class="pct">支付占比 ${pct}% | 点击看明细</div>
+    <div class="amt" style="color:var(--ink);font-size:18px">${fmt(d.value)}</div>
+    <div class="pct">占比 ${pct}%</div>
   `;
-  
   document.querySelectorAll('#payerLegendList .legend-item').forEach(el => el.style.background = 'transparent');
-  const el = document.getElementById('payer-legend-' + index);
-  if (el) el.style.background = 'var(--cream)';
-  
+  document.getElementById('payer-legend-' + index).style.background = 'var(--cream)';
   document.getElementById('payerInfo').onclick = () => showList(d.name + ' 支付明细', d.items);
 }
 
@@ -802,81 +734,89 @@ function budget(){
   const t=calc();
   const rows=S.budget.cats.map(c=>{const u=catPaid(c),rest=c.amount-u,over=rest<0;return `<tr class="clickable-row" style="cursor:pointer;" onclick="showList('${esc(c.name)} 明细', S.items.filter(i=>['${c.mods.join("','")}'].includes(i.module)))"><td><b>${esc(c.name)}</b></td><td class="n">${fmt(c.amount)}</td><td class="n">${fmt(u)}</td><td class="n ${over?'over':''}">${fmt(rest)}</td></tr>`}).join('');
   const mods=Object.keys(MODULES).map(k=>{const l=itemsBy(k),c=l.reduce((s,i)=>s+paid(i),0);return `<tr class="clickable-row" style="cursor:pointer;" onclick="showList('${MODULES[k]} 明细', S.items.filter(i=>i.module==='${k}'))"><td>${MODULES[k]}</td><td class="n">${l.length}</td><td class="n">${fmt(c)}</td></tr>`}).join('');
-  return `<div class="head"><div><div class="k">BUDGET</div><h2>预算与支出中心</h2></div><button class="btn p" onclick="openAdd()">＋ 新增支出</button></div>
-  <div class="grid"><div class="stat acc clickable" onclick="showList('所有项目明细', S.items)"><div class="l">总预算</div><div class="v">${fmt(t.budget)}</div></div><div class="stat clickable" onclick="showList('所有支出明细', [...S.items, ...S.changes])"><div class="l">累计总支出</div><div class="v">${fmt(t.total)}</div></div><div class="stat"><div class="l">剩余可用</div><div class="v ${t.remaining<0?'over':''}">${fmt(t.remaining)}</div></div></div>
-  <div class="card"><div class="ct">分项预算 <span style="font-size:10px;color:var(--ink3);margin-left:10px;">(点击行看明细)</span></div><div class="tbl"><table><thead><tr><th>分类</th><th class="n">规划</th><th class="n">实际花费</th><th class="n">剩余</th></tr></thead><tbody>${rows}</tbody></table></div></div>
-  <div class="card"><div class="ct">按模块 <span style="font-size:10px;color:var(--ink3);margin-left:10px;">(点击行看明细)</span></div><div class="tbl"><table><thead><tr><th>模块</th><th class="n">条目</th><th class="n">实际花费</th></tr></thead><tbody>${mods}</tbody></table></div></div>`;
+  return `<div class="head" style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;"><h2 style="font-size:22px; color:var(--wood-d);">预算与支出</h2><button class="btn p" onclick="openAdd()">＋ 记一笔</button></div>
+  <div class="grid"><div class="stat main clickable" onclick="showList('所有支出明细', [...S.items, ...S.changes])"><div class="l">累计支出 <span>明细 👉</span></div><div class="v">${fmt(t.total)}</div></div><div class="stat acc"><div class="l">总预算</div><div class="v">${fmt(t.budget)}</div></div></div>
+  <div class="card"><div class="ct">分项预算</div><div class="tbl" style="border:none;"><table style="min-width:100%;"><thead><tr><th>分类</th><th class="n">规划</th><th class="n">已花</th><th class="n">剩余</th></tr></thead><tbody>${rows}</tbody></table></div></div>
+  <div class="card"><div class="ct">按模块看</div><div class="tbl" style="border:none;"><table style="min-width:100%;"><thead><tr><th>模块</th><th class="n">笔数</th><th class="n">已花</th></tr></thead><tbody>${mods}</tbody></table></div></div>`;
 }
 
 function moduleView(m){
   const l=itemsBy(m),c=l.reduce((s,i)=>s+paid(i),0);
-  
   let filterHTML = '';
   if(m === 'appliance') {
-    filterHTML = `
-      <div style="margin-bottom: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
-        <button class="btn t" onclick="filterAppliance('')">全部</button>
-        <button class="btn t" onclick="filterAppliance('已付款')">💰 已付款</button>
-        <button class="btn t" onclick="filterAppliance('已到货')">📦 已到货</button>
-        <button class="btn t" onclick="filterAppliance('已完成')">✅ 已安装</button>
-        <button class="btn t" onclick="filterAppliance('智能家电')">🤖 智能家电</button>
-      </div>
-    `;
+    filterHTML = `<div style="margin-bottom:16px; display:flex; gap:8px; overflow-x:auto; padding-bottom:4px;">
+      <button class="btn t" onclick="filterAppliance('')">全部</button>
+      <button class="btn t" onclick="filterAppliance('已付款')">💰 已付款</button>
+      <button class="btn t" onclick="filterAppliance('已到货')">📦 已到货</button>
+      <button class="btn t" onclick="filterAppliance('已完成')">✅ 已安装</button>
+      <button class="btn t" onclick="filterAppliance('智能家电')">🤖 智能</button>
+    </div>`;
   }
-
-  const rec=l.map(i=>`<div class="rec" onclick="editItem('${i.id}')" data-type="${esc(i.applianceType||'')}"><div class="l"><div class="t">${esc(i.name)}</div><div class="m">${esc(i.houseType||i.laborType||i.room||'')} ${i.brand?'· '+esc(i.brand):''} ${i.channel?'· '+esc(i.channel):''} ${i.applianceType?'· '+esc(i.applianceType):''} ${i.spec?'· '+esc(i.spec):''} ${i.payer?'· 💰'+esc(i.payer):''} ${i.note?'· '+esc(i.note):''}</div></div><div class="r"><div class="a">${fmt(paid(i))}</div></div><div class="st">${esc(i.status||'已完成')}</div><div class="ops"><button class="btn t" onclick="event.stopPropagation(); editItem('${i.id}')">编辑</button><button class="btn x" onclick="event.stopPropagation(); delItem('${i.id}')">删除</button></div></div>`).join('');
-  
-  return `<div class="head"><div><div class="k">${MODULES[m]}</div><h2>${MODULES[m]}</h2></div><button class="btn p" onclick="openItem('${m}')">＋ 新增项目</button></div>
-  <div class="mini"><div><span>总花费</span><b>${fmt(c)}</b></div><div><span>条目</span><b>${l.length}</b></div></div>
-  ${filterHTML}
-  <div id="recList">${l.length?rec:`<div class="empty"><span class="e">${MODULES[m]}</span>暂无记录，点击右上角新增</div>`}</div>`;
+  const rec=l.map(i=>`<div class="rec" onclick="editItem('${i.id}')" data-type="${esc(i.applianceType||'')}">
+    <div class="l"><div class="t">${esc(i.name)}</div><div class="m">${i.room ? (ROOM_ICONS[i.room]||'🏷️')+' '+esc(i.room)+' ' : ''} ${i.houseType||i.laborType||''} ${i.brand?'· '+esc(i.brand):''} ${i.payer?'· 💰'+esc(i.payer):''}</div></div>
+    <div class="r"><div class="a">${fmt(paid(i))}</div></div><div class="st">${esc(i.status||'已完成')}</div>
+    <div class="ops">
+      <button class="btn t" onclick="event.stopPropagation(); editItem('${i.id}')">✏️ 编辑</button>
+      <button class="btn x" onclick="event.stopPropagation(); delItem('${i.id}')">✕ 删除</button>
+    </div>
+  </div>`).join('');
+  return `<div class="head" style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;"><h2 style="font-size:22px; color:var(--wood-d);">${MODULES[m]}</h2><button class="btn p" onclick="openItem('${m}')">＋ 添加</button></div>
+  <div class="mini" style="background:var(--card); border:none; box-shadow:0 2px 12px rgba(166,143,125,.04); padding:14px; display:flex; gap:20px; border-radius:14px;"><div><span style="font-size:11px; color:var(--ink3);">总花费</span><br><b style="font-size:18px;">${fmt(c)}</b></div><div><span style="font-size:11px; color:var(--ink3);">笔数</span><br><b style="font-size:18px;">${l.length}</b></div></div>
+  ${filterHTML}<div id="recList">${l.length?rec:`<div class="empty"><span class="e">${MODULES[m]}</span>暂无记录</div>`}</div>`;
 }
 
 function filterAppliance(type) {
-  const recs = document.querySelectorAll('#recList .rec');
-  recs.forEach(r => {
-    const status = r.querySelector('.st').innerText;
-    const dataType = r.dataset.type;
-    if (!type || status.includes(type) || dataType.includes(type)) {
-      r.style.display = 'flex';
-    } else {
-      r.style.display = 'none';
-    }
+  document.querySelectorAll('#recList .rec').forEach(r => {
+    const status = r.querySelector('.st').innerText; const dataType = r.dataset.type;
+    r.style.display = (!type || status.includes(type) || dataType.includes(type)) ? 'flex' : 'none';
   });
 }
 
 function progress(){
-  const l=S.schedule.map(s=>{const cls=s.status==='已完成'?'f':s.status==='进行中'?'d':'';return `<div class="tli"><div class="tld ${cls}"></div><div class="tlc"><div class="tlt"><b>${esc(s.name)}</b><span class="pill ${cls}">${esc(s.status)}</span></div><div class="tldate">${s.start||'未定'} — ${s.end||'未定'}</div>${s.note?`<div style="font-size:12px;color:var(--ink2);margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)">${esc(s.note)}</div>`:''}<div class="ops" style="margin-top:8px"><button class="btn t" onclick="editStage('${s.id}')">编辑</button></div></div></div>`}).join('');
-  return `<div class="head"><div><div class="k">SCHEDULE</div><h2>施工进度</h2></div><button class="btn p" onclick="addStage()">＋ 新增阶段</button></div><div class="tl">${l}</div>`;
+  const l=S.schedule.map(s=>{
+    const cls=s.status==='已完成'?'done':s.status==='进行中'?'doing':'todo';
+    return `<div class="prog-item">
+      <div class="prog-left">
+        <div class="prog-name">${esc(s.name)}</div>
+        ${s.note?`<div class="prog-note">${esc(s.note)}</div>`:''}
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="prog-status ${cls}" onclick="editStage('${s.id}')" style="cursor:pointer;">${esc(s.status)}</div>
+      </div>
+    </div>`;
+  }).join('');
+  return `<div class="head" style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;"><h2 style="font-size:22px; color:var(--wood-d);">施工进度</h2><button class="btn p" onclick="addStage()">＋ 阶段</button></div><div>${l}</div>`;
 }
 
 function changes(){
-  const l=S.changes.map(c=>`<div class="rec" onclick="editChange('${c.id}')"><div class="l"><div class="t">${esc(c.name)}</div><div class="m">${c.payer?'💰'+esc(c.payer):''} ${c.note?'· '+esc(c.note):''}</div></div><div class="r"><div class="a">${fmt(c.amount)}</div></div><div class="ops"><button class="btn t" onclick="event.stopPropagation(); editChange('${c.id}')">编辑</button><button class="btn x" onclick="event.stopPropagation(); delChange('${c.id}')">删除</button></div></div>`).join('');
+  const l=S.changes.map(c=>`<div class="rec" onclick="editChange('${c.id}')"><div class="l"><div class="t">${esc(c.name)}</div><div class="m">${c.payer?'💰'+esc(c.payer):''}</div></div><div class="r"><div class="a">${fmt(c.amount)}</div></div>
+  <div class="ops">
+    <button class="btn t" onclick="event.stopPropagation(); editChange('${c.id}')">✏️ 编辑</button>
+    <button class="btn x" onclick="event.stopPropagation(); delChange('${c.id}')">✕ 删除</button>
+  </div></div>`).join('');
   const con=S.changes.reduce((s,c)=>s+num(c.amount),0);
-  return `<div class="head"><div><div class="k">OTHER FEES</div><h2>其他费用</h2></div><button class="btn p" onclick="addChange()">＋ 新增其他费用</button></div><div class="mini"><div><span>其他费用总计</span><b style="color:var(--red)">${fmt(con)}</b></div><div><span>记录数</span><b>${S.changes.length}</b></div></div>${S.changes.length?l:`<div class="empty"><span class="e">📝</span>暂无其他费用</div>`}`;
+  return `<div class="head" style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;"><h2 style="font-size:22px; color:var(--wood-d);">其他费用</h2><button class="btn p" onclick="addChange()">＋ 费用</button></div><div class="mini" style="background:var(--card); border:none; box-shadow:0 2px 12px rgba(166,143,125,.04); padding:14px; border-radius:14px;"><div><span style="font-size:11px; color:var(--ink3);">总花费</span><br><b style="color:var(--red);font-size:18px;">${fmt(con)}</b></div></div>${S.changes.length?l:`<div class="empty"><span class="e">📝</span>暂无其他费用</div>`}`;
 }
 
 function rooms(){
   const map={};
   S.items.forEach(i=>{
-    if(i.module === 'house' || i.module === 'labor') return;
-    if(i.room === '全屋' || i.room === '未分类' || !i.room) return; 
-    
-    const r=i.room;
-    if(!map[r])map[r]={a:0,p:0,n:0,list:[]};
-    map[r].a+=num(i.amount);
-    map[r].p+=paid(i);
-    map[r].n++;
-    map[r].list.push(i);
+    if(i.module === 'house' || i.module === 'labor' || i.room === '全屋' || i.room === '未分类' || !i.room) return; 
+    const r=i.room; if(!map[r])map[r]={a:0,p:0,n:0,list:[]};
+    map[r].a+=num(i.amount); map[r].p+=paid(i); map[r].n++; map[r].list.push(i);
   });
   const keys=Object.keys(map).sort((a,b)=>map[b].a-map[a].a);
-  const cards=keys.map(r=>`<div class="room ${roomFocus===r?'on':''}" onclick="focusRoom('${esc(r)}')"><div class="rn">${esc(r)}</div><div class="ra">${fmt(map[r].a)}</div><div class="rs">共 ${map[r].n} 项</div></div>`).join('');
+  const cards=keys.map(r=>`<div class="room ${roomFocus===r?'on':''}" onclick="focusRoom('${esc(r)}')">
+    <div class="rn">${ROOM_ICONS[r]||'🏷️'} ${esc(r)}</div>
+    <div class="ra">${fmt(map[r].a)}</div>
+    <div class="rs">共 ${map[r].n} 项</div>
+  </div>`).join('');
   let detail='';
   if(roomFocus&&map[roomFocus]){
     const rows=map[roomFocus].list.map(i=>`<tr class="clickable-row" style="cursor:pointer;" onclick="editItem('${i.id}')"><td>${esc(i.name)}</td><td>${MODULES[i.module]}</td><td class="n">${fmt(paid(i))}</td><td>${esc(i.payer||'')}</td></tr>`).join('');
-    detail=`<div class="card" style="margin-top:14px"><div class="ct">${esc(roomFocus)} · 明细 <span style="font-size:10px;color:var(--ink3);margin-left:10px;">(点击行可编辑)</span></div><div class="tbl"><table><thead><tr><th>项目</th><th>模块</th><th class="n">金额</th><th>付款人</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+    detail=`<div class="card" style="margin-top:16px"><div class="ct">${ROOM_ICONS[roomFocus]||'🏷️'} ${esc(roomFocus)} 明细</div><div class="tbl"><table><thead><tr><th>项目</th><th>模块</th><th class="n">金额</th><th>付款人</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
   }
-  return `<div class="head"><div><div class="k">BY ROOM</div><h2>房间费用</h2></div></div>${keys.length?`<div class="roomgrid">${cards}</div>`:`<div class="empty"><span class="e">🏠</span>暂无具体房间数据</div>`}${detail}`;
+  return `<div class="head" style="margin-bottom:16px;"><h2 style="font-size:22px; color:var(--wood-d);">房间明细</h2></div>${keys.length?`<div class="roomgrid">${cards}</div>`:`<div class="empty"><span class="e">🏠</span>暂无房间数据</div>`}${detail}`;
 }
 
 function focusRoom(r){roomFocus=roomFocus===r?null:r;render()}
@@ -903,7 +843,7 @@ function modal(title,fields,onSave){
 function closeModal(){document.getElementById('modal').classList.remove('on');document.getElementById('mask').classList.remove('on')}
 function openAdd(){
   modal('新增什么？',[{type:'tip',html:'选择要新增的类别'}],()=>{});
-  document.getElementById('mform').innerHTML=`<div style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px">${Object.keys(MODULES).map(k=>`<button class="btn g" style="justify-content:flex-start" onclick="closeModal();openItem('${k}')">＋ ${MODULES[k]}</button>`).join('')}<button class="btn g" style="justify-content:flex-start" onclick="closeModal();addChange()">＋ 其他费用</button><button class="btn g" style="justify-content:flex-start" onclick="closeModal();addStage()">＋ 施工阶段</button></div>`;
+  document.getElementById('mform').innerHTML=`<div style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px">${Object.keys(MODULES).map(k=>`<button class="btn g" style="justify-content:flex-start;padding:14px;" onclick="closeModal();openItem('${k}')">＋ ${MODULES[k]}</button>`).join('')}<button class="btn g" style="justify-content:flex-start;padding:14px;" onclick="closeModal();addChange()">＋ 其他费用</button><button class="btn g" style="justify-content:flex-start;padding:14px;" onclick="closeModal();addStage()">＋ 施工阶段</button></div>`;
   document.getElementById('msave').style.display='none';
 }
 
@@ -914,31 +854,27 @@ function openItem(m,id, defaultData = {}){
   const isAppliance=base.module==='appliance';
   const isHouse=base.module==='house';
   const isLabor=base.module==='labor';
-  
   const moduleOptions = Object.keys(MODULES).map(k => ({ value: k, label: MODULES[k] }));
 
   const fields=[
-    {key:'name',label:'项目名称',type:'text',value:base.name||'',span:true,ph:isHouse?'例如：交首付款 / 缴契税':(isLabor?'例如：水电工钱 / 泥瓦工钱':'例如：冰箱 / 沙发')},
+    {key:'name',label:'项目名称',type:'text',value:base.name||'',span:true,ph:isHouse?'例如：交首付款':(isLabor?'例如：水电工钱':'例如：冰箱 / 沙发')},
     {key:'module',label:'模块',type:'select',value:base.module,options:moduleOptions},
     {key:'amount',label:'实际花费',type:'number',value:base.amount || base.paid || ''},
-    {key:'payer',label:'支付人',type:'text',value:base.payer||'',span:true,placeholder:'例如：老公 / 老婆 / 父母'},
+    {key:'payer',label:'支付人',type:'text',value:base.payer||'',span:true,placeholder:'例如：老公 / 老婆'},
     {key:'note',label:'备注',type:'textarea',value:base.note||'',span:true}
   ];
 
-  if (isHouse) {
-    fields.splice(1, 0, {key:'houseType',label:'购房子项',type:'select',value:base.houseType||'首付款',options:HOUSE_TYPES});
-  } else if (isLabor) {
+  if (isHouse) fields.splice(1, 0, {key:'houseType',label:'购房子项',type:'select',value:base.houseType||'首付款',options:HOUSE_TYPES});
+  else if (isLabor) {
     fields.splice(1, 0, {key:'laborType',label:'人工工种',type:'select',value:base.laborType||'水电工',options:LABOR_TYPES});
     fields.splice(2, 0, {key:'status',label:'状态',type:'select',value:base.status||'待下单',options:STATUS});
   } else {
-    fields.splice(2, 0, {key:'room',label:'房间',type:'select',value:base.room||'全屋',options:ROOMS});
+    const roomOpts = ROOMS.map(r => ({value:r, label:`${ROOM_ICONS[r]||'🏷️'} ${r}`}));
+    fields.splice(2, 0, {key:'room',label:'房间',type:'select',value:base.room||'全屋',options:roomOpts});
     fields.splice(3, 0, {key:'brand',label:'品牌/商家',type:'text',value:base.brand||''});
     fields.splice(4, 0, {key:'channel',label:'购买途径',type:'select',value:base.channel||'线下实体店',options:CHANNELS});
     fields.splice(5, 0, {key:'status',label:'状态',type:'select',value:base.status||'待下单',options:STATUS});
-    
-    if(isAppliance) {
-      fields.splice(4, 0, {key:'applianceType',label:'家电类型',type:'select',value:base.applianceType||'普通家电',options:APPLIANCE_TYPES});
-    }
+    if(isAppliance) fields.splice(4, 0, {key:'applianceType',label:'家电类型',type:'select',value:base.applianceType||'普通家电',options:APPLIANCE_TYPES});
     if(isCustom) {
       fields.push({key:'cabinet',label:'柜体类型',type:'select',value:base.cabinet||'衣柜',options:['衣柜','橱柜','书柜','鞋柜','电视柜','餐边柜','榻榻米','其他']});
       fields.push({key:'board',label:'板材',type:'select',value:base.board||'颗粒板',options:['颗粒板','多层实木板','生态板','密度板','实木','进口板材','其他']});
@@ -955,11 +891,8 @@ function openItem(m,id, defaultData = {}){
     if(!data.name){toast('请填写名称');return false}
     if(!num(data.amount)&&num(data.area)&&num(data.unitPrice))data.amount=num(data.area)*num(data.unitPrice);
     if(!num(data.amount)&&num(data.qty)&&num(data.unitPrice))data.amount=num(data.qty)*num(data.unitPrice);
-    data.amount = num(data.amount);
-    data.paid = data.amount;
-    
+    data.amount = num(data.amount); data.paid = data.amount;
     if(isHouse && !data.status) data.status = '已完成';
-    
     if(id)Object.assign(it,data);else S.items.push(Object.assign({id:uid()},data));
     save();toast('已保存');
   });
@@ -967,7 +900,18 @@ function openItem(m,id, defaultData = {}){
 }
 
 function editItem(id){const it=S.items.find(i=>i.id===id);if(it)openItem(it.module,id)}
-function delItem(id){if(confirm('确定删除？')){S.items=S.items.filter(i=>i.id!==id);save();toast('已删除')}}
+
+function closeConfirm(){document.getElementById('confirmModal').classList.remove('on');}
+function delItem(id){
+  const it=S.items.find(i=>i.id===id);
+  if(!it) return;
+  document.getElementById('confirmMsg').innerHTML = `确定要删除「${it.name}」吗？<br>删除后将无法恢复。`;
+  document.getElementById('confirmModal').classList.add('on');
+  document.getElementById('confirmBtn').onclick = () => {
+    S.items=S.items.filter(i=>i.id!==id); save(); toast('已删除'); closeConfirm();
+  };
+}
+
 function openBudget(){
   modal('调整预算',[
     {type:'tip',html:'修改下方分类金额后，总预算将自动累加计算。'},
@@ -977,10 +921,7 @@ function openBudget(){
     {key:'c3',label:'软装',type:'number',value:S.budget.cats[2].amount},
     {key:'c4',label:'家电',type:'number',value:S.budget.cats[3].amount}
   ],d=>{
-    S.budget.cats[0].amount=num(d.c1);
-    S.budget.cats[1].amount=num(d.c2);
-    S.budget.cats[2].amount=num(d.c3);
-    S.budget.cats[3].amount=num(d.c4);
+    S.budget.cats[0].amount=num(d.c1); S.budget.cats[1].amount=num(d.c2); S.budget.cats[2].amount=num(d.c3); S.budget.cats[3].amount=num(d.c4);
     S.budget.total = S.budget.cats.reduce((sum, cat) => sum + cat.amount, 0);
     save();toast('总预算已自动更新！');
   });
@@ -994,15 +935,22 @@ function addChange(){modal('新增其他费用',[
   {key:'payer',label:'支付人',type:'text',value:'',span:true,placeholder:'例如：老公 / 老婆'}
 ],d=>{
   if(!d.name){toast('请填写明细');return false}
-  S.changes.push({id:uid(), name:d.name, amount:num(d.amount), payer:d.payer, note:'', status:'已确认', room:'全屋'}); 
-  save();toast('已保存')
+  S.changes.push({id:uid(), name:d.name, amount:num(d.amount), payer:d.payer, note:'', status:'已确认', room:'全屋'}); save();toast('已保存')
 });document.getElementById('msave').style.display=''}
 function editChange(id){const c=S.changes.find(x=>x.id===id);modal('编辑其他费用',[
   {key:'name',label:'费用明细',type:'text',value:c.name,span:true},
   {key:'amount',label:'金额',type:'number',value:c.amount||'',span:true},
   {key:'payer',label:'支付人',type:'text',value:c.payer||'',span:true}
 ],d=>{Object.assign(c,d);save();toast('已保存')});document.getElementById('msave').style.display=''}
-function delChange(id){if(confirm('确定删除？')){S.changes=S.changes.filter(x=>x.id!==id);save();toast('已删除')}}
+function delChange(id){
+  const it=S.changes.find(i=>i.id===id);
+  if(!it) return;
+  document.getElementById('confirmMsg').innerHTML = `确定要删除「${it.name}」吗？<br>删除后将无法恢复。`;
+  document.getElementById('confirmModal').classList.add('on');
+  document.getElementById('confirmBtn').onclick = () => {
+    S.changes=S.changes.filter(x=>x.id!==id); save(); toast('已删除'); closeConfirm();
+  };
+}
 
 function exportCSV(){
   const t=calc(),lines=[];
@@ -1026,9 +974,7 @@ function showMore(){
 document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b && b.dataset.tab){tab=b.dataset.tab;roomFocus=null;render();window.scrollTo({top:0})}});
 document.getElementById('renoSubMenu').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b && b.dataset.tab){tab=b.dataset.tab;roomFocus=null;render();window.scrollTo({top:0})}});
 document.querySelectorAll('.bn[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;roomFocus=null;render();window.scrollTo({top:0})});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-
-// init();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeConfirm();}});
 </script>
 </body>
 </html>
